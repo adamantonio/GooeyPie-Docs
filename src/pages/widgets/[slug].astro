@@ -1,0 +1,25 @@
+---
+import { getCollection } from 'astro:content';
+
+// 1. Tell Astro what pages to generate
+export async function getStaticPaths() {
+  const widgets = await getCollection('widgets');
+  return widgets.map(entry => ({
+    params: { slug: entry.slug },  // e.g. "button", "slider"
+    props: { entry },              // passes the content to the template
+  }));
+}
+
+// 2. Receive the content for this specific page
+const { entry } = Astro.props;
+const { title, properties, methods } = entry.data;  // structured frontmatter
+const { Content } = await entry.render();            // freeform markdown body
+---
+
+<!-- 3. Render it however you like -->
+<h1>{title}</h1>
+
+<Content />  <!-- renders the markdown body -->
+
+<h2>Properties</h2>
+{properties.map(p => <p>{p.name} — {p.description}</p>)}

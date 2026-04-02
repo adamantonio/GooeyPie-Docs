@@ -1,5 +1,5 @@
 ---
-title: Example Guide
+title: Your first GooeyPie app
 description: A guide in my new Starlight docs site.
 ---
 
