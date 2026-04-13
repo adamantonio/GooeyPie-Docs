@@ -1,25 +1,278 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from "astro:content";
+import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
+import { Code } from '@astrojs/starlight/components';
+import CodeExample from '../../components/CodeExample.astro';
 
-// 1. Tell Astro what pages to generate
+// 1. Generate a path for every file in src/content/widgets/
 export async function getStaticPaths() {
-  const widgets = await getCollection('widgets');
-  return widgets.map(entry => ({
-    params: { slug: entry.slug },  // e.g. "button", "slider"
-    props: { entry },              // passes the content to the template
+  const widgetEntries = await getCollection("widgets");
+  return widgetEntries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
   }));
 }
 
-// 2. Receive the content for this specific page
+// 2. Get the data for the current page
 const { entry } = Astro.props;
-const { title, properties, methods } = entry.data;  // structured frontmatter
-const { Content } = await entry.render();            // freeform markdown body
+const { title, syntax, parameters, properties, methods, events, exclude_events, styles } = entry.data;
+
+// 3. Render the Markdown body (the "Usage" section)
+const { Content, headings: mdHeadings } = await render(entry);
+
+const apiHeadings = [
+  { depth: 2, slug: "syntax", text: "Syntax" },
+  { depth: 2, slug: "properties", text: "Properties" },
+  { depth: 2, slug: "methods", text: "Methods" },
+  { depth: 2, slug: "events", text: "Events" },
+  { depth: 2, slug: "styles", text: "Styles" },
+];
+
+const allHeadings = [...mdHeadings, ...apiHeadings];
+
+// Utility to handle inline links/code in YAML descriptions
+const parseMD = (str: string) => str
+  .replace(/`([^`]+)`/g, '<code>$1</code>')
+  .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+
+// 4. Set up standard events and filter based on exclude_events
+const STANDARD_EVENTS = [
+  { name: 'on_click', description: 'Called when the user clicks the widget with the primary mouse button..' },
+  { name: 'on_double_click', description: 'Called when the user rapidly clicks the widget twice in succession.' },
+  { name: 'on_right_click', description: 'Called when the user clicks the widget with the right mouse button.' },
+  { name: 'on_middle_click', description: 'Called when the user clicks the widget with the scroll wheel button.' },
+  { name: 'on_mouse_down', description: 'Called the moment the primary mouse button is pressed down over the widget.' },
+  { name: 'on_mouse_up', description: 'Called the moment the primary mouse button is released over the widget.' },
+  { name: 'on_mouse_enter', description: "Called when the mouse cursor moves into the widget's area." },
+  { name: 'on_mouse_leave', description: "Called when the mouse cursor moves out of the widget's area." },
+  { name: 'on_key_press', description: 'Called when a keyboard key is pressed while the widget has focus.' },
+  { name: 'on_focus_gained', description: 'Called when the widget becomes the currently selected element on the screen, ready to receive keyboard interaction.' },
+  { name: 'on_focus_lost', description: 'Called when the widget is no longer the active target for keyboard input.' },
+];
+
+// Filter out standard events that this specific widget doesn't support
+const filteredStandardEvents = STANDARD_EVENTS.filter(
+  (evt) => !exclude_events.includes(evt.name)
+);
+
 ---
 
-<!-- 3. Render it however you like -->
-<h1>{title}</h1>
+<StarlightPage frontmatter={{ title: title }} headings={allHeadings}>
+  <Content />
 
-<Content />  <!-- renders the markdown body -->
+  <hr />
 
-<h2>Properties</h2>
-{properties.map(p => <p>{p.name} — {p.description}</p>)}
+  <h2 id="syntax"><i class="fa-solid fa-lightbulb"></i>Syntax</h2>
+  <Code code={syntax} lang="python" />
+  
+
+  {
+    parameters && (
+      <>
+        <h3 id="parameters">Parameters</h3>
+        <ul>
+          {
+            parameters.map((p) => (
+              <li>
+                <code>{p.name}</code> ({p.type}): <span set:html={p.description} />
+              </li>
+            ))
+          }
+        </ul>
+      </>
+    )
+  }
+
+
+  <h2 id="properties"><i class="fa-solid fa-list-ul"></i>Properties</h2>
+  {properties.length > 0 ? (
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          {/* <th>Default</th> */}
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {properties.map(p => (
+          <tr>
+            <td><code>.{p.name}</code></td>
+            <td set:html={parseMD(p.type)}></td>
+            {/* <td><code>{p.default || '—'}</code></td> */}
+            <td set:html={parseMD(p.description)}></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    ) : (
+      <p><em>This widget has no unique properties.</em></p>
+    )}
+
+  <h2 id="methods"><i class="fa-solid fa-gears"></i>Methods</h2>
+  {methods.length > 0 ? (
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          {/* <th>Parameters</th> */}
+          <th>Returns</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          methods.map((m) => (
+            <tr>
+              <td>
+                <code>.{m.name}</code>
+              </td>
+              {/* <td>{m.parameters || '-'}</td> */}
+              <td set:html={m.returns ? parseMD(m.returns) : ''}></td>
+              <td set:html={parseMD(m.description)}></td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+    ) : (
+      <p><em>This widget has no unique methods.</em></p>
+    )}
+
+
+    <h2 id="events"><i class="fa-solid fa-arrow-pointer"></i>Events</h2>
+    {events.length > 0 ? (
+      <p>This widget supports the following events as well as the standard events listed below.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          {events.map(e => (
+            <tr>
+              <td><code>.{e.name}</code></td>
+              <td set:html={parseMD(e.description)}></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    ) : (
+      <p>This widget has no unique events. It supports the standard events listed below.</p>
+    )}
+
+    {filteredStandardEvents.length > 0 && (
+    <div id="standard-events">
+      <h3>Standard events</h3>
+      <ul>
+        {filteredStandardEvents.map(e => (
+          <li title={e.description}><code>.{e.name}</code></li>
+        ))}
+      </ul>
+    </div>
+    )}
+
+
+    <h2 id="styles"><i class="fa-solid fa-wand-magic-sparkles"></i>Styles</h2>
+    {styles.length > 0 ? (
+
+      <div class="style-container">
+
+        <img 
+          data-light={`/images/widgets/styles/${entry.id}_styles_light.svg`} 
+          data-dark={`/images/widgets/styles/${entry.id}_styles_dark.svg`} 
+          alt="Styles for this widget" 
+        />
+
+      </div>
+
+      <CodeExample name={`style-gallery/${entry.id}_styles`} noCode />
+
+      <h4>How to specify colors</h4>
+      <ul>
+        <li>Colors can be specified as either a hex code (e.g. <code>"#FF0000"</code>), a <a href="https://davidbau.com/colors/" target="_blank">CSS color name</a>, or <code>"transparent"</code>.</li>
+        <li>When specifying a color for a style, you can provide either a single color or two colors separated by a comma. If you provide two colors, the first will be used for light mode and the second for dark mode. For example, <code>my_widget.text_color = "steelblue", "skyblue"</code> would specify steelblue for light mode and sky blue for dark mode.</li>
+      </ul>
+
+
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Default</th>
+          </tr>
+        </thead>
+        <tbody>
+        {
+          styles.map((s) => (
+            <tr>
+              <td>
+                <code>.style.{s.name}</code>
+              </td>
+              <td set:html={parseMD(s.description)}></td>
+              <td>{s.default && <code>{s.default}</code>}</td>
+            </tr>
+          ))
+        }
+        </tbody>
+      </table>
+    ) : (
+      <p><em>There are no styles associated with this widget.</em></p>
+    )}
+
+
+  </StarlightPage>
+
+
+<style>
+
+
+  #parameters {
+    margin-top: 1rem;    
+  }
+
+  #standard-events h3 {
+      margin-top: 1rem;
+  }
+
+  #standard-events ul {
+      padding: 0;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      list-style: none;
+      margin-top: 1rem;
+  }
+
+  #standard-events li {
+    border: 1px solid var(--sl-color-gray-5);
+    margin: 0;
+  }
+
+   #standard-events code {
+    display: inline-block;
+    margin: 0;
+    padding: 10px;
+    cursor: help;
+  }
+ 
+
+  h2 i {
+    margin-right: 1rem;
+    color: var(--sl-color-primary);
+    font-size: 0.75em;
+  }
+
+  .style-container {
+    background-color: var(--sl-color-black);
+    border: 1px solid var(--sl-color-gray-5);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    margin-top: 2rem;
+  }
+
+</style>

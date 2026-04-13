@@ -1,0 +1,72 @@
+---
+title: Slider
+
+syntax: my_slider = gp.Slider(min_value, max_value)
+
+parameters:
+  - name: min_value
+    type: integer
+    description: The minimum value of the slider.
+  - name: max_value
+    type: integer
+    description: The maximum value of the slider.
+
+properties:
+  - name: value
+    type: integer
+    description: Gets or sets the current value of the slider. Setting this property will move the slider to the position corresponding to the new value.
+  - name: increment
+    type: integer
+    description: Gets or sets the increment of the slider. The slider will snap to values that are multiples of the increment. For example, if the minimum value is 0, the maximum value is 100, and the increment is 10, then the slider will snap to the values 0, 10, 20, ..., 100.
+  - name: orientation
+    type: string
+    description: 'Gets or sets the orientation of the slider. Either `"horizontal"` or `"vertical"`. Default is `"horizontal"`. This property cannot be changed after the slider is added to a layout.'
+  - name: width
+    type: integer
+    description: Gets or sets the width of the slider in pixels.
+  - name: height
+    type: integer
+    description: Gets or sets the height of the slider in pixels.
+  - name: disabled
+    type: boolean
+    description: Gets or sets whether the slider is disabled. When disabled is set to `True`, the slider does not respond to click or drag events.
+
+exclude_events:
+  - on_key_press
+  - on_focus_gained
+  - on_focus_lost
+
+events:
+  - name: on_change(event_function)
+    description: The function to call when the value of the slider changes. This event is triggered whenever the user clicks on the slider or drags the slider handle to change its value, or when the value is changed programmatically.
+
+styles:
+  - name: active_bg_color
+    description: The background color of the slider track to the left of the slider button.
+  - name: inactive_bg_color
+    description: The background color of the slider track to the right of the slider button.
+  - name: button_color
+    description: The color of the slider button.
+  - name: button_disabled_color
+    description: The color of the slider button when it is disabled.
+  - name: button_hover_color
+    description: The color of the slider button when it is hovered over.
+  - name: border_color
+    description: The color of the border of the slider button. Will not be visible unless `border_width` is greater than 0.
+    default: '"transparent"'
+  - name: border_width
+    description: The width of the border of the slider button.
+    default: "0"
+  - name: corner_radius
+    description: The radius of the corners of the slider button.
+  
+---
+
+A Slider is a widget that allows the user to select a value from a range by moving a butto along a track. The slider can be oriented either horizontally or vertically, and it can be configured to snap to specific increments within the range.
+
+
+## Examples
+
+### Volume control
+This examples shows how to use the `on_change` event of a slider to update a label with the current value of the slider.
+

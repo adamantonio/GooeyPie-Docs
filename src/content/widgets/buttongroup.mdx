@@ -1,0 +1,91 @@
+---
+
+title: ButtonGroup
+
+syntax: my_button_group = gp.ButtonGroup(button_labels)
+
+parameters:
+  - name: button_labels
+    type: list of strings
+    description: The labels for the buttons in the group. The number of items in the list determines how many buttons are in the group.
+
+properties:
+  - name: selected
+    type: string
+    description: Gets or sets the label of the currently selected button in the group. Setting this property will change the selected button to the one with the specified label.
+  - name: width
+    type: integer
+    description: Gets or sets the width of the button group in pixels.
+  - name: height
+    type: integer
+    description: Gets or sets the height of the button group in pixels.
+  - name: disabled
+    type: boolean
+    description: Gets or sets whether the button group is disabled. When disabled is set to `True`, the buttons in the group do not respond to click events.
+
+exclude_events:
+  - on_key_press
+  - on_focus_gained
+  - on_focus_lost
+
+events:
+  - name: on_change(event_function)
+    description: The function to call when the selected button in the group changes. This event is triggered whenever the user clicks on a button in the group or when the selected button is changed programmatically.
+
+styles:
+  - name: bg_color
+    description: The background color of the button group.
+  - name: border_width
+    description: The width of the border of the button group.
+    default: "3"
+  - name: corner_radius
+    description: The radius of the corners of the button group.
+    default: "6"
+  - name: font_name
+    description: 'The font of the text of the buttons. Either an installed font or a generic font name: `"serif"`, `"sans-serif"`, `"monospace"` or `"system"`'
+    default: '"system"'
+  - name: font_size
+    description: The size of the text of the buttons.
+    default: "12"
+  - name: font_weight
+    description: 'The weight of the text of the buttons. Either `"normal"` or `"bold"`.'
+    default: '"normal"'
+  - name: font_style
+    description: 'The style of the text of the buttons. Either `"normal"` or `"italic"`.'
+    default: '"normal"'
+  - name: text_color
+    description: The color of the text of the buttons.
+  - name: text_disabled_color
+    description: The color of the text of the buttons when they are disabled.
+  - name: selected_color
+    description: The color of the selected button in the group.
+  - name: selected_hover_color
+    description: The color of the selected button in the group when hovered over.
+  - name: selected_disabled_color
+    description: The color of the selected button in the group when it is disabled.
+  - name: unselected_color
+    description: The color of the unselected buttons in the group.
+  - name: unselected_hover_color
+    description: The color of the unselected buttons in the group when hovered over.
+  - name: unselected_disabled_color
+    description: The color of the unselected buttons in the group when they are disabled.
+---
+
+import CodeExample from '../../components/CodeExample.astro';
+
+
+A ButtonGroup is a set of two or more buttons that are grouped together. Only one button in the group can be selected at a time, and selecting a button will automatically deselect any other button that is currently selected.
+
+Use a ButtonGroup when you have 2-5 options and you want the user to see all of them at once.
+
+
+## Examples
+
+### Metric conversion
+Here's an example of a ButtonGroup that allows the user to select a unit of measurement for converting a distance value. When the user clicks on a button, we update the selected unit and display the converted distance in that unit.
+
+<CodeExample
+  name="metric_conversion"
+  title="Metric conversion"
+  mark="unit_group"
+/>

@@ -1,0 +1,11 @@
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+/* Offset to prevent the sticky header from covering <h2> targets */
+[id] {
+    scroll-margin-top: 2rem;
+}
+

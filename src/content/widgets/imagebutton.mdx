@@ -1,0 +1,99 @@
+---
+
+title: ImageButton
+
+syntax: my_imagebutton = gp.ImageButton(image_path, event_function, button_text)
+
+parameters:
+  - name: image_path
+    type: string
+    description: The path and filename of the image to be displayed on the button.
+  - name: event_function
+    type: function
+    description: The event function that will be called when the button is pressed. This function must accept a single argument for the event object.
+  - name: button_text
+    type: string
+    description: '<strong>Optional.</strong> The text of the button.'
+
+properties:
+  - name: text
+    type: string
+    description: Gets or sets the text of the button.
+  - name: image
+    type: string
+    description: Gets or sets the path and filename of the image to be displayed on the button.
+  - name: image_position
+    type: string
+    description: 'Gets or sets the position of the image on the button relative to any text, if it has been set. Valid values are `"left"`, `"right"`, `"top"` and `"bottom"`. Default is `"left"`.'
+  - name: width
+    type: integer
+    description: Gets or sets the width of the button in pixels.
+  - name: height
+    type: integer
+    description: Gets or sets the height of the button in pixels.
+  - name: disabled
+    type: boolean
+    description: Gets or sets whether the button is disabled. When disabled is set to True, the button does not respond to click events.
+
+exclude_events:
+  - on_key_press
+  - on_focus_gained
+  - on_focus_lost
+
+events:
+  - name: on_activate(event_function)
+    description: The function to call when the button is pressed. This event should be set when the button is first created.
+
+styles:
+  - name: border_color
+    description: The color of the border of the button. Will not be visible unless `border_width` is greater than 0.
+    default: '"transparent"'
+  - name: border_width
+    description: The width of the border of the button.
+    default: "0"
+  - name: button_color
+    description: The color of the button.
+  - name: button_disabled_color
+    description: The color of the button when it is disabled.
+  - name: button_hover_color
+    description: The color of the button when it is hovered over.
+  - name: corner_radius
+    description: The radius of the corners of the button.
+    default: "6"
+  - name: padding
+    description: Additional space around the text of the button
+    default: "0"
+  - name: text_color
+    description: The color of the text of the button.
+  - name: text_disabled_color
+    description: The color of the text of the button when it is disabled.
+  - name: font_name
+    description: 'The font of the text of the button. Either an installed font or a generic font name: `"serif"`, `"sans-serif"`, `"monospace"` or `"system"`'
+    default: '"system"'
+  - name: font_size
+    description: The size of the text of the button.
+    default: "12"
+  - name: font_weight
+    description: 'The weight of the text of the button. Either `"normal"` or `"bold"`.'
+    default: '"normal"'
+  - name: font_style
+    description: 'The style of the text of the button. Either `"normal"` or `"italic"`.'
+    default: '"normal"'
+  
+
+---
+
+import CodeExample from '../../components/CodeExample.astro';
+
+An ImageButton is a button that displays an image. It can also optionally display text in addition to the image. The image can be positioned to the left, right, top or bottom of the text.
+
+
+## Examples
+### Media Player
+In this (totally fake) media player, three image buttons are used for play, pause and shuffle controls. This shows how an ImageButton can have optional text in addition to the image. The images are from [IconsDB](https://www.iconsdb.com/).
+
+<CodeExample
+  name="media_player"
+  title="Media Player"
+  mark={["play_btn", "pause_btn", "shuffle_btn"]}
+/>

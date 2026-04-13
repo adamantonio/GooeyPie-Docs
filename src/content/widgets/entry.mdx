@@ -1,0 +1,102 @@
+---
+title: Entry
+
+syntax: my_entry = gp.Entry(placeholder_text)
+
+parameters:
+  - name: placeholder_text
+    type: string
+    description: '<strong>Optional.</strong> The text that will be displayed in the Entry when it is empty. This text disappears when the Entry gains focus.'
+
+properties:
+  - name: text
+    type: string
+    description: Gets or sets the text of the entry.
+  - name: placeholder_text
+    type: string
+    description: Gets or sets the placeholder text of the entry.
+  - name: width
+    type: integer
+    description: Gets or sets the width of the entry in pixels.
+  - name: height
+    type: integer
+    description: Gets or sets the height of the entry in pixels.
+  - name: disabled
+    type: boolean
+    description: Gets or sets whether the entry is disabled. When disabled is set to `True`, the entry does not respond to user input.
+
+methods:
+  - name: clear()
+    parameters: none
+    returns: None
+    description: Clears the text in the entry.
+  - name: focus()
+    parameters: none
+    returns: None
+    description: Sets the focus to the entry, allowing the user to start typing in it immediately.
+  - name: select()
+    parameters: none
+    returns: None
+    description: Selects all the text in the entry.
+
+events:
+  - name: on_change(event_function)
+    description: The function to call when the text in the entry changes. This event is triggered whenever the user types in the entry or when the text is changed programmatically.
+
+styles:
+  - name: bg_color
+    description: The background color of the entry.
+  - name: border_color
+    description: The color of the border of the entry.
+  - name: border_width
+    description: The width of the border of the entry.
+  - name: corner_radius
+    description: The radius of the corners of the entry.
+    default: "6"
+  - name: font_name
+    description: 'The font of the text of the Entry. Either an installed font or a generic font name: `"serif"`, `"sans-serif"`, `"monospace"` or `"system"`'
+    default: '"system"'
+  - name: font_size
+    description: The size of the text of the Entry.
+    default: "12"
+  - name: font_weight
+    description: 'The weight of the text of the Entry. Either `"normal"` or `"bold"`.'
+    default: '"normal"'
+  - name: font_style
+    description: 'The style of the text of the Entry. Either `"normal"` or `"italic"`.'
+    default: '"normal"'
+  - name: justify
+    description: 'The horizontal alignment of the text in the entry. Can be set to `"left"`, `"center"`, or `"right"`.'
+    default: '"left"'
+  - name: text_color
+    description: The color of the text of the entry.
+  - name: text_disabled_color
+    description: The color of the text of the entry when it is disabled.
+  - name: placeholder_color
+    description: The color of the placeholder text of the entry.
+  
+---
+
+import CodeExample from '../../components/CodeExample.astro';
+
+
+An Entry widget is a single-line text input field that allows the user to enter and edit text. It can be used for various purposes, such as accepting user input, displaying information, or creating forms.
+
+## Examples
+
+### Hello, you!
+In this example, the user enters their name and we say a personalised hello! If they don't want to tell us their name, we can just say "Hello, friend!" instead.
+<CodeExample
+  name="hello_you"
+  title="Hello, you!"
+  mark="name_entry"
+/>
+
+
+### Login form
+Here's an example of a simple login form with username and password fields. When the user clicks the "Login" button, we check if the username and password are correct and display a message accordingly.
+<CodeExample
+  name="login_form"
+  title="Login form"
+  mark="user_entry"
+/>

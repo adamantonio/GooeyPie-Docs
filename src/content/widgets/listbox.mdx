@@ -1,0 +1,125 @@
+---
+title: Listbox
+
+syntax: my_listbox = gp.Listbox(items)
+
+parameters:
+  - name: items
+    type: list of strings
+    description: <strong>Optional.</strong> The list of items to be displayed in the listbox.
+
+properties:
+  - name: items
+    type: list of strings
+    description: Gets or sets the list of items in the listbox. Setting this property will update the items in the listbox to match the new list.
+  - name: selected
+    type: string, or list of strings if `multiple_selection` is enabled
+    description: Gets or sets the currently selected item in the listbox. Setting this property will change the selected item to the one with the specified value.
+  - name: selected_index
+    type: integer, or list of integers if `multiple_selection` is enabled
+    description: Gets or sets the index of the currently selected item in the listbox (starting from 0). Setting this property will change the selected item to the one at the specified index.
+  - name: multiple_selection
+    type: boolean
+    description: Gets or sets whether multiple selection is enabled for the listbox. When multiple selection is enabled, the user can select more than one item from the listbox at a time. In this case, the `selected` property will return a list of the selected items, and the `selected_index` property will return a list of the indices of the selected items.
+  - name: width
+    type: integer
+    description: Gets or sets the width of the listbox in pixels.
+  - name: height
+    type: integer
+    description: Gets or sets the height of the listbox in pixels.
+  - name: disabled
+    type: boolean
+    description: Gets or sets whether the listbox is disabled. When disabled is set to `True`, the listbox does not respond to click events.
+
+methods:
+  - name: add_item(item)
+    parameters: item
+    returns: '`None`'
+    description: Adds the `item` to the end of the listbox.
+  - name: add_item_to_start(item)
+    parameters: item
+    returns: '`None`'
+    description: Adds the `item` to the start of the listbox.
+  - name: add_item_at_index(item, index)
+    parameters: item, index
+    returns: '`None`'
+    description: Adds the `item` at the specified `index` in the listbox. If `index` is out of bounds, the item will be added to the end of the listbox.
+  - name: remove_item_at_index(index)
+    parameters: index
+    returns: string
+    description: Removes and returns the item at the specified `index` from the listbox.
+  - name: remove_selected()
+    parameters: none
+    returns: string, or list of strings if `multiple_selection` is enabled
+    description: Removes the currently selected item(s) from the listbox. If no item is selected, this method does nothing.
+  - name: select_all()
+    parameters: none
+    returns: '`None`'
+    description: Selects all the items in the listbox. Has no effect if `multiple_selection` is not enabled.
+  - name: clear()
+    parameters: none
+    returns: '`None`'
+    description: Removes all the items from the listbox.
+
+styles:
+  - name: bg_color
+    description: The background color of the listbox.
+    default: '"transparent"'
+  - name: border_color
+    description: The color of the border of the listbox.
+  - name: border_width
+    description: The width of the border of the listbox.
+    default: "2"
+  - name: corner_radius
+    description: The radius of the corners of the listbox.
+    default: "6"
+  - name: text_color
+    description: The color of the text of the listbox.
+  - name: text_disabled_color
+    description: The color of the text of the listbox when it is disabled.
+  - name: selected_color
+    description: The color of the background of the selected item in the listbox.
+  - name: unselected_color
+    description: The color of the background of the unselected items in the listbox.
+    default: '"transparent"'
+  - name: hover_color
+    description: The color of the background of the listbox items when the mouse hovers over them.
+  - name: font_name
+    description: 'The font of the text of the button. Either an installed font or a generic font name: `"serif"`, `"sans-serif"`, `"monospace"` or `"system"`'
+    default: '"system"'
+  - name: font_size
+    description: The size of the text of the button.
+    default: "12"
+  - name: font_weight
+    description: 'The weight of the text of the button. Either `"normal"` or `"bold"`.'
+    default: '"normal"'
+  - name: font_style
+    description: 'The style of the text of the button. Either `"normal"` or `"italic"`.'
+    default: '"normal"'
+  
+
+---
+
+import CodeExample from '../../components/CodeExample.astro';
+
+A Listbox widget displays a list of items from which the user can select one, or it can be configured for multiple selection. The items in the listbox can be set when the listbox is created or updated while the app is running.
+
+## Examples
+
+### Simple Todo
+This app shows how the items in a listbox can be added and removed during runtime.
+
+<CodeExample
+  name="simple_todo"
+  title="Simple Todo"
+  mark="todo_list"
+/>
+
+### Pizza Order
+This example demonstrates how to enable multiple selection for a listbox, allowing the user to select more than one item at a time.
+
+<CodeExample
+  name="pizza_order"
+  title="Pizza Order"
+  mark="toppings_list"
+/>

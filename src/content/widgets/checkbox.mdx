@@ -1,0 +1,106 @@
+---
+title: Checkbox
+
+syntax: my_check = gp.Checkbox(label_text, checked)
+
+parameters:
+  - name: label_text
+    type: string
+    description: '<strong>Optional.</strong> The text of the checkbox label.'
+  - name: checked
+    type: boolean   
+    description: '<strong>Optional.</strong> Whether the checkbox is initially checked. Default is <code>False</code>.'
+
+properties:
+  - name: checked
+    type: boolean
+    description: Gets or sets whether the checkbox is checked.
+  - name: text
+    type: string
+    description: Gets or sets the text of the checkbox label.
+  - name: width
+    type: integer
+    description: Gets or sets the width of the checkbox in pixels. This is the total width of the checkbox, including the label.
+  - name: height
+    type: integer
+    description: Gets or sets the height of the checkbox in pixels. This is the total height of the checkbox, including the label.
+  - name: size
+    type: integer
+    description: Gets or sets the size of the checkbox in pixels. This is the width and height of the square box, not including the label.
+  - name: disabled
+    type: boolean
+    description: Gets or sets whether the checkbox is disabled. When disabled is set to `True`, the checkbox does not respond to click events.
+
+methods:
+  - name: toggle()
+    parameters: none
+    returns: None
+    description: Toggles the checked state of the checkbox.
+
+exclude_events:
+    - on_key_press
+    - on_focus_gained
+    - on_focus_lost
+
+events:
+  - name: on_change(event_function)
+    description: The function to call when the checked state of the checkbox changes. This event is triggered whenever the user clicks on the checkbox or when the checked state is changed programmatically.
+
+styles:
+  - name: border_color
+    description: The color of the border of the checkbox.
+  - name: border_width
+    description: The width of the border of the checkbox.
+  - name: checkbox_color
+    description: The color of the square box of the checkbox.
+  - name: checkbox_hover_color
+    description: The color of the square box of the checkbox when it is hovered over.
+  - name: checkbox_disabled_color
+    description: The color of the square box of the checkbox when it is disabled.
+  - name: corner_radius
+    description: The radius of the corners of the square box of the checkbox.
+    default: "6"
+  - name: text_color
+    description: The color of the text of the checkbox label.
+  - name: text_disabled_color
+    description: The color of the text of the checkbox label when it is disabled.
+  - name: font_name
+    description: 'The font of the text of the checkbox label. Either an installed font or a generic font name: `"serif"`, `"sans-serif"`, `"monospace"` or `"system"`'
+    default: '"system"'
+  - name: font_size
+    description: The size of the text of the checkbox label.
+    default: "12"
+  - name: font_weight
+    description: 'The weight of the text of the checkbox label. Either `"normal"` or `"bold"`.'
+    default: '"normal"'
+  - name: font_style
+    description: 'The style of the text of the checkbox label. Either `"normal"` or `"italic"`.'
+    default: '"normal"'
+  
+---
+
+import CodeExample from '../../components/CodeExample.astro';
+
+
+Checkboxes are used to give a user a binary choice, such as yes/no or true/false. They consist of a square box that can be checked or unchecked, and an optional label that describes the choice.
+
+## Examples
+
+### Tell me a secret
+In this example, the `on_change()` event of the checkbox is used to show or hide a secret message when the user checks or unchecks the box.
+
+<CodeExample
+  name="my_secret"
+  title="Tell me a secret"
+  mark="secret_chk"
+/>
+
+### Simple quiz
+This example shows how to use several checkboxes to create a simple quiz with multiple answer questions.
+
+<CodeExample
+  name="simple_quiz"
+  title="Simple Quiz"
+  mark={["python_chk", "java_chk", "html_chk", "esperanto_chk"]}
+/>
+

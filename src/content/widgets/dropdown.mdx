@@ -1,0 +1,84 @@
+---
+title: Dropdown
+
+syntax: my_dropdown = gp.Dropdown(options)
+
+parameters:
+  - name: options
+    type: list of strings
+    description: The list of options for the dropdown.
+
+properties:
+  - name: selected
+    type: string
+    description: Gets or sets the currently selected option in the dropdown. Setting this property will change the selected option to the one with the specified value.
+  - name: selected_index
+    type: integer
+    description: Gets or sets the index of the currently selected option in the dropdown (starting from 0). Setting this property will change the selected option to the one at the specified index.
+  - name: options
+    type: list of strings
+    description: Gets or sets the list of options for the dropdown. Setting this property will update the options in the dropdown to match the new list.
+  - name: width
+    type: integer
+    description: Gets or sets the width of the dropdown in pixels.
+  - name: height
+    type: integer
+    description: Gets or sets the height of the dropdown in pixels.
+  - name: disabled
+    type: boolean
+    description: Gets or sets whether the dropdown is disabled. When disabled is set to `True`, the dropdown does not respond to click events.
+
+exclude_events:
+  - on_key_press
+
+events:
+  - name: on_change(event_function)
+    description: The function to call when the selected option in the dropdown changes. This event is triggered whenever the user selects a different option from the dropdown or when the selected option is changed programmatically.
+
+styles:
+  - name: bg_color
+    description: The background color of the dropdown.
+  - name: border_color
+    description: The color of the border of the dropdown. Will not be visible unless `border_width` is greater than 0.
+  - name: border_width
+    description: The width of the border of the dropdown.
+    default: "2"
+  - name: button_color
+    description: The color of the button of the dropdown.
+  - name: button_hover_color
+    description: The color of the button of the dropdown when the mouse hovers over it.
+  - name: corner_radius
+    description: The radius of the corners of the dropdown.
+    default: "6"
+  - name: dropdown_hover_color
+    description: The color of the dropdown options when the mouse hovers over them.
+  - name: text_color
+    description: The color of the text of the dropdown.
+  - name: text_disabled_color
+    description: The color of the text of the dropdown when it is disabled.
+  - name: font_name
+    description: 'The font of the text of the button. Either an installed font or a generic font name: `"serif"`, `"sans-serif"`, `"monospace"` or `"system"`'
+    default: '"system"'
+  - name: font_size
+    description: The size of the text of the button.
+    default: "12"
+  - name: font_weight
+    description: 'The weight of the text of the button. Either `"normal"` or `"bold"`.'
+    default: '"normal"'
+  - name: font_style
+    description: 'The style of the text of the button. Either `"normal"` or `"italic"`.'
+    default: '"normal"'
+---
+
+import CodeExample from '../../components/CodeExample.astro';
+
+A Dropdown is a widget that allows the user to select one option from a list of options. When the user clicks on the dropdown, it expands to show the list of options, and the user can click on an option to select it. The selected option is then displayed in the dropdown.
+
+## Examples
+### Say hi in...
+In this example, we create a dropdown that allows the user to select a language, and then displays a greeting in that language when the user selects an option.
+<CodeExample
+  name="say_hi_in"
+  title="Say hi in..."
+  mark="language_dd"
+/>

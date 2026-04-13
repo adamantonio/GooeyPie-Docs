@@ -1,0 +1,114 @@
+---
+title: Textbox
+
+syntax: my_textbox = gp.Textbox(text)
+
+parameters:
+  - name: text
+    type: string
+    description: '<strong>Optional.</strong> The initial text to display in the textbox.'
+
+properties:
+  - name: text
+    type: string
+    description: Gets or sets the text of the textbox.
+  - name: height
+    type: integer
+    description: Gets or sets the height of the textbox in pixels.
+  - name: width
+    type: integer
+    description: Gets or sets the width of the textbox in pixels.
+  - name: disabled
+    type: boolean
+    description: Gets or sets whether the textbox is disabled. When disabled is set to `True`, the textbox does not respond to user input.
+
+methods:
+  - name: append(text)
+    parameters: text (string)
+    returns: '`None`'
+    description: Appends the specified text to the existing text in the textbox.
+  - name: append_line(text)
+    parameters: text (string)
+    returns: '`None`'
+    description: Appends the specified text to the existing text in the textbox on a new line.
+  - name: prepend(text)
+    parameters: text (string)
+    returns: '`None`'
+    description: Prepends the specified text to the existing text in the textbox.
+  - name: prepend_line(text)
+    parameters: text (string)
+    returns: '`None`'
+    description: Prepends the specified text to the existing text in the textbox on a new line.
+  - name: scroll_to_start()
+    parameters: none
+    returns: '`None`'
+    description: Scrolls the Textbox so that the start of the text is visible.
+  - name: scroll_to_end()
+    parameters: none
+    returns: '`None`'
+    description: Scrolls the Textbox so that the end of the text is visible.
+  - name: focus()
+    parameters: none
+    returns: '`None`'
+    description: Sets the focus to the textbox, allowing the user to start typing in it immediately.
+  - name: clear()
+    parameters: none
+    returns: '`None`'
+    description: Clears the text in the textbox.
+
+events:
+  - name: on_change(event_function)
+    description: The function to call when the text in the textbox changes. This event is triggered whenever the user types in the textbox or when the text is changed programmatically.
+
+styles:
+  - name: bg_color
+    description: The background color of the Textbox.
+  - name: border_color
+    description: The color of the border of the Textbox.
+  - name: border_width
+    description: The width of the border of the Textbox.
+  - name: corner_radius
+    description: The radius of the corners of the Textbox.
+    default: "6"
+  - name: font_name
+    description: 'The font of the text of the Textbox. Either an installed font or a generic font name: `"serif"`, `"sans-serif"`, `"monospace"` or `"system"`'
+    default: '"system"'
+  - name: font_size
+    description: The size of the text of the Textbox.
+    default: "12"
+  - name: font_weight
+    description: 'The weight of the text of the Textbox. Either `"normal"` or `"bold"`.'
+    default: '"normal"'
+  - name: font_style
+    description: 'The style of the text of the Textbox. Either `"normal"` or `"italic"`.'
+    default: '"normal"'
+  - name: text_color
+    description: The color of the text of the Textbox.
+  - name: text_disabled_color
+    description: The color of the text of the Textbox when it is disabled.
+
+--- 
+
+import CodeExample from '../../components/CodeExample.astro';
+
+A Textbox is a multi-line text input field that allows the user to enter and edit text. Use a Textbox when you want to allow the user to enter more than one line of text, or when you want to display a large amount of text that may not fit in a single line.
+
+## Examples
+
+### License Viewer
+This example loads a text file and creates a Textbox to display its contents.
+
+<CodeExample
+  name="license_viewer"
+  title="License Viewer"
+  mark="license_viewer"
+/>
+
+### Encoder
+In this app, the `on_change` event of one Textbox is used to update the text of another Textbox with an encoded version of the input text.
+
+<CodeExample
+  name="oncodor"
+  title="Oncodor"
+  mark={["oncodod_textbox", "message_textbox"]}
+/>

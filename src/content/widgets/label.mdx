@@ -1,0 +1,78 @@
+---
+title: Label
+
+syntax: my_label = gp.Label(label_text)
+
+parameters:
+  - name: label_text
+    type: string
+    description: The text of the label.
+
+properties:
+  - name: text
+    type: string
+    description: Gets or sets the text of the label.
+  - name: width
+    type: integer
+    description: Gets or sets the width of the label in pixels.
+  - name: height
+    type: integer
+    description: Gets or sets the height of the label in pixels.
+  - name: disabled
+    type: boolean
+    description: Gets or sets whether the label is disabled. A label should be disabled to visually signal that any associated widgets, like an Entry, are inactive.
+
+exclude_events:
+  - on_key_press
+  - on_focus_gained
+  - on_focus_lost
+
+styles:
+  - name: align
+    description: 'The alignment of the label within its cell. Either `"left"`, `"center"` or `"right"`.'
+    default: '"center"'
+  - name: bg_color
+    description: The background color of the label. Take care not to make a label look like a button by giving it a background color.
+    default: '"transparent"'
+  - name: corner_radius
+    description: The radius of the corners of the label.
+    default: "6"
+  - name: justify
+    description: 'The justification of the text of the label if it spans over multiple lines. Either `"left"`, `"center"` or `"right"`.'
+    default: '"center"'
+  - name: padding
+    description: Additional space around the text of the label
+    default: "0"
+  - name: text_color
+    description: The color of the text of the label.
+  - name: text_disabled_color
+    description: The color of the text of the label when it is disabled.
+  - name: font_name
+    description: 'The font of the text of the button. Either an installed font or a generic font name: `"serif"`, `"sans-serif"`, `"monospace"` or `"system"`'
+    default: '"system"'
+  - name: font_size
+    description: The size of the text of the button.
+    default: "12"
+  - name: font_weight
+    description: 'The weight of the text of the button. Either `"normal"` or `"bold"`.'
+    default: '"normal"'
+  - name: font_style
+    description: 'The style of the text of the button. Either `"normal"` or `"italic"`.'
+    default: '"normal"'
+  
+---
+
+import CodeExample from '../../components/CodeExample.astro';
+
+A Label widget displays text in the app. The text of the label can be set when creating the Label widget, or by setting the `text` property of the Label widget after it has been created.
+
+## Examples
+
+### Login form
+Here's an example of a simple login form with username and password fields. Static Labels are used to indicate which field is for the username and which is for the password, and a Label that starts off empty is used to display a message when the user clicks the login button.
+
+<CodeExample
+  name="login_form"
+  title="Login form"
+  mark={["user_label", "pass_label", "login_btn", "status_label"]}
+/>

@@ -1,0 +1,52 @@
+
+/* --- UNIVERSAL BRAND TOKENS --- */
+:root {
+  --p-h: 243.4; --p-c: 0.15;  /* Primary Blue */
+  --s-h: 84.8;  --s-c: 0.14;  /* Secondary Yellow */
+  --t-h: 49.1;  --t-c: 0.16;  /* Tertiary Orange */
+  --n-h: var(--p-h); --n-c: 0.01; /* Brand Neutral */
+}
+
+/* --- LIGHT MODE (Default) --- */
+:root {
+  /* Starlight Primary Accent */
+  --sl-color-accent-low: oklch(0.92 0.05 var(--p-h));
+  --sl-color-accent: oklch(0.64 var(--p-c) var(--p-h));
+  --sl-color-accent-high: oklch(0.35 0.12 var(--p-h));
+
+  /* Starlight Gray Scale (Neutrals) */
+  --sl-color-white: oklch(0.18 var(--n-c) var(--n-h));    /* Text */
+  --sl-color-gray-1: oklch(0.25 var(--n-c) var(--n-h));
+  --sl-color-gray-2: oklch(0.35 var(--n-c) var(--n-h));
+  --sl-color-gray-3: oklch(0.50 var(--n-c) var(--n-h));
+  --sl-color-gray-4: oklch(0.70 var(--n-c) var(--n-h));
+  --sl-color-gray-5: oklch(0.85 var(--n-c) var(--n-h));
+  --sl-color-gray-6: oklch(0.92 var(--n-c) var(--n-h));
+  --sl-color-black: oklch(0.98 var(--n-c) var(--n-h));    /* Background */
+
+  /* Your Custom Expansion */
+  --secondary: oklch(0.88 var(--s-c) var(--s-h));
+  --tertiary: oklch(0.75 var(--t-c) var(--t-h));
+}
+
+/* --- DARK MODE --- */
+[data-theme='dark'] {
+  /* Starlight Primary Accent (Brighter for Dark Mode) */
+  --sl-color-accent-low: oklch(0.35 0.10 var(--p-h));
+  --sl-color-accent: oklch(0.75 0.12 var(--p-h));
+  --sl-color-accent-high: oklch(0.92 0.05 var(--p-h));
+
+  /* Starlight Gray Scale (Neutrals Flipped) */
+  --sl-color-white: oklch(0.98 var(--n-c) var(--n-h));    /* Text */
+  --sl-color-gray-1: oklch(0.90 var(--n-c) var(--n-h));
+  --sl-color-gray-2: oklch(0.75 var(--n-c) var(--n-h));
+  --sl-color-gray-3: oklch(0.55 var(--n-c) var(--n-h));
+  --sl-color-gray-4: oklch(0.40 var(--n-c) var(--n-h));
+  --sl-color-gray-5: oklch(0.28 var(--n-c) var(--n-h));
+  --sl-color-gray-6: oklch(0.20 var(--n-c) var(--n-h));
+  --sl-color-black: oklch(0.12 var(--n-c) var(--n-h));    /* Background */
+  
+  /* Your Custom Expansion (Adjusted for Dark Mode) */
+  --secondary: oklch(0.92 0.10 var(--s-h));
+  --tertiary: oklch(0.80 0.12 var(--t-h));
+}

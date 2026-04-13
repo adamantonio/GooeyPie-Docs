@@ -1,0 +1,51 @@
+---
+title: Image
+
+syntax: my_image = gp.Image(image_path)
+
+parameters:
+  - name: image_path
+    type: string
+    description: The path and filename of the image to be displayed.
+
+properties:
+  - name: image
+    type: string
+    description: Gets or sets the path and filename of the image to be displayed.
+
+exclude_events:
+  - on_key_press
+  - on_focus_gained
+  - on_focus_lost
+
+---
+
+import CodeExample from '../../components/CodeExample.astro';
+
+An Image widget displays an image in the app. The image can be set by providing the path and filename of the image file when creating the Image widget, or by setting the `image` property of the Image widget after it has been created.
+
+GooeyPie cannot resize your image for you, so you should make sure to use an image that is the appropriate size for your app. Supported image formats are PNG, JPEG and GIF.
+
+## Examples
+
+### Theme Switcher
+An image with a transparent backgroung works well when the theme of the app might change. This image is from [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Noto_Emoji_Oreo_1f324.svg).
+
+<CodeExample
+    name="theme_switch"
+    title="Theme Switcher"
+    mark="weather_img"
+/>
+
+### Let there be light
+This app demonstrates how the image can be changed while the app is running. When the user clicks the switch, the image changes from a light bulb that is off to a light bulb that is on.
+The light bulb images are from [pngfind](https://www.pngfind.com/download/xRJomh_bulb-clipart-lamp-pencil-and-in-color-bulb/).
+
+Importantly, the images are exactly the same size, so that when the image is swapped, the layout of the app does not change.
+
+<CodeExample
+    name="light_switcher"
+    title="Let there by light"
+    mark="light_img"
+/>
+
