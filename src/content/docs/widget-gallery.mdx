@@ -1,0 +1,99 @@
+---
+title: "Widget Gallery"
+description: "See all the GooeyPie widgets in action!"
+tableOfContents: false
+
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+export const widgets = [
+  {
+    name: "Button",
+    description: "Use a Button when you want the user to trigger a specific action, like submitting an answer, rolling a virtual die, or calculating a score."
+  },
+  {
+    name: "ButtonGroup",
+    description: "Use a ButtonGroup when you have a set of related actions and want to keep those buttons neatly organized together in a row."
+  },
+  {
+    name: "Checkbox",
+    description: 'Use a Checkbox when you need the user to make a simple "yes or no" choice, like "Include numbers" in a password generator or "Show advanced settings".'
+  },
+  {
+    name: "Dropdown",
+    description: "Use a Dropdown when you want the user to pick one option from a list without taking up too much screen space."
+  },
+  {
+    name: "Entry",
+    description: "Use an Entry when you need the user to type in a single line of text, like their name, an email address, or a numeric value."
+  },
+  {
+    name: "ImageButton",
+    description: "Use an ImageButton when you want to make your app look awesome by using a clickable picture or icon instead of standard text."
+  },
+  {
+    name: "Image",
+    description: "Use an Image when you want to display a picture, logo, or graphic to make your app visually appealing."
+  },
+  {
+    name: "Label",
+    description: "Use a Label when you need to display instructions, headings, or the final results of what your app just calculated."
+  },
+  {
+    name: "Listbox",
+    description: "Use a Listbox when you want the user to select one or more items from a visible list that they can scroll through."
+  },
+  {
+    name: "RadioGroup",
+    description: "Use a RadioGroup when you want to give the user a few visible choices, but they are only allowed to pick exactly one (like selecting an 'Easy,' 'Medium,' or 'Hard' difficulty level)."
+  },
+  {
+    name: "Secret",
+    description: "Use a Secret when you need the user to type a password or sensitive information that should be safely hidden with dots."
+  },
+  {
+    name: "Slider",
+    description: "Use a Slider when you want the user to easily pick a number from a range by dragging a handle, like adjusting volume, speed, or a character's stats."
+  },
+  {
+    name: "Switch",
+    description: "Use a Switch when you want a modern, mobile-style way for users to flip a setting completely on or off."
+  },
+  {
+    name: "Textbox",
+    description: "Use a Textbox when you need the user to type a lot of text across multiple lines, like writing a message, a journal entry, or a feedback form."
+  }
+];
+
+Welcome to the GooeyPie Widget Gallery! Here you can see every tool you have available to build your apps.
+
+<CardGrid>
+  {widgets.map(widget => {
+    const slug = widget.name.toLowerCase();
+    
+    return (
+      <Card title={widget.name}>
+        <video loop autoplay muted playsinline
+          src={`/videos/widget-gallery/${slug}.mp4`}
+          data-light={`/videos/widget-gallery/${slug}_light.mp4`}
+          data-dark={`/videos/widget-gallery/${slug}_dark.mp4`}>
+        </video>
+        <p>{widget.description}</p>
+        
+        <a 
+          href={`/widgets/${slug}`} 
+          style={{ 
+            display: 'inline-block', 
+            marginTop: '1rem', 
+            fontWeight: '600', 
+            color: 'var(--sl-color-text-accent)',
+            textDecoration: 'none'
+          }}
+        >
+          Learn how to use the {widget.name}&nbsp;➔
+        </a>
+      </Card>
+    );
+  })}
+</CardGrid>

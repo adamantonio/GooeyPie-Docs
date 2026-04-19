@@ -1,0 +1,40 @@
+---
+// Import the default Starlight footer
+import Default from '@astrojs/starlight/components/Footer.astro';
+---
+
+<Default {...Astro.props} />
+
+<div class="gooeypie-footer">
+  <!-- <p>🥧 Built with love for GooeyPie students.</p> -->
+  <p class="attribution">
+    GooeyPie is a simplified wrapper proudly built on top of Tom Schimansky's fantastic 
+    <a href="https://customtkinter.tomschimansky.com/" target="_blank" rel="noopener noreferrer">CustomTkinter</a> library.
+  </p>
+</div>
+
+<style>
+  .gooeypie-footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--sl-color-gray-5);
+    text-align: center;
+    color: var(--sl-color-gray-3);
+    font-size: var(--sl-text-sm);
+  }
+  
+  .attribution {
+    margin-top: 0.5rem;
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-4);
+  }
+
+  .attribution a {
+    color: var(--sl-color-text-accent);
+    text-decoration: none;
+  }
+
+  .attribution a:hover {
+    text-decoration: underline;
+  }
+</style>

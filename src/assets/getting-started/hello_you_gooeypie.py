@@ -7,19 +7,20 @@ def update_greeting(event):
     else:
         greeting_lbl.text = "Hello, friend!"
 
-
 app = gp.GooeyPieApp("Hello, You!")
 
 # Create widgets
 question_lbl = gp.Label("What's your name?")
-name_entry = gp.Entry()
-say_hello_btn = gp.Button("Say Hello", update_greeting)
-greeting_lbl = gp.Label()
 
-# Make the label widget wider
+# Create entry widget and set event listener
+name_entry = gp.Entry()
 name_entry.width = 200
 
-# Add widgets to the window
+say_hello_btn = gp.Button("Say Hello", update_greeting)
+
+greeting_lbl = gp.Label("")
+
+# Add widgets to window
 app.add(question_lbl, 1, 1)
 app.add(name_entry, 1, 2)
 app.add(say_hello_btn, 1, 3)

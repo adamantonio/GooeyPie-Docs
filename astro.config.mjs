@@ -20,6 +20,7 @@ export default defineConfig({
 			// Override the Head component
             components: {
                 Head: './src/components/CustomHead.astro',
+                Footer: './src/components/CustomFooter.astro',
             },
             social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/adamantonio/GooeyPie' }],
             customCss: ['./src/styles/style.css'],
@@ -27,23 +28,25 @@ export default defineConfig({
                 {
                     label: 'Getting started',
                     items: [
-                        { label: 'Example Guide', slug: 'guides/example' },
+                        { label: 'Installation', slug: 'getting-started/installation' },
+                        { label: 'Your First App', slug: 'getting-started/your-first-gooeypie-app' },
                     ],
                 },
                 {
                     label: 'Widgets',
                     items: [
-                        { label: 'Gallery of all widgets', link: '/gallery' },
+                        { label: 'Gallery of all widgets', link: '/widget-gallery' },
                         { label: 'Button', link: '/widgets/button' },
-                        { label: 'Entry', link: '/widgets/entry' },
                         { label: 'ButtonGroup', link: '/widgets/buttongroup' },
                         { label: 'Checkbox', link: '/widgets/checkbox' },
                         { label: 'Dropdown', link: '/widgets/dropdown' },
+                        { label: 'Entry', link: '/widgets/entry' },
                         { label: 'ImageButton', link: '/widgets/imagebutton' },
                         { label: 'Image', link: '/widgets/image' },
                         { label: 'Label', link: '/widgets/label' },
                         { label: 'Listbox', link: '/widgets/listbox' },
                         { label: 'RadioGroup', link: '/widgets/radiogroup' },
+                        { label: 'Secret', link: '/widgets/secret' },
                         { label: 'Slider', link: '/widgets/slider' },
                         { label: 'Switch', link: '/widgets/switch' },
                         { label: 'Textbox', link: '/widgets/textbox' },

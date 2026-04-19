@@ -1,0 +1,34 @@
+---
+title: Installation
+description: How to install GooeyPie on your system.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+To get started with GooeyPie, you'll need to install it using Python's package manager, `pip`. Select your operating system below for specific instructions.
+
+<Tabs>
+  <TabItem label="Windows">
+    Open your Command Prompt or PowerShell and run the following command:
+
+    ```bash
+    python -m pip install gooeypie
+    ```
+  </TabItem>
+  <TabItem label="macOS">
+    Open your Terminal and run the following command:
+
+    ```bash
+    python3 -m pip install gooeypie
+    ```
+  </TabItem>
+  <TabItem label="Linux">
+    Open your Terminal. You may need to ensure `tkinter` is installed on your system first (e.g., `sudo apt install python3-tk` on Ubuntu/Debian). Then run:
+
+    ```bash
+    python3 -m pip install gooeypie
+    ```
+  </TabItem>
+</Tabs>
+
+<script src="../../scripts/os-detection.js"></script>

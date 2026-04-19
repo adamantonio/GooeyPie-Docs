@@ -34,6 +34,10 @@ function initialiseControl() {
         seekSlider.addEventListener('input', () => {
             const time = (seekSlider.value / 100) * video.duration;
             video.currentTime = time;
+
+            if (icon.className == "fas fa-undo") {
+                icon.className = "fa fa-play";
+            }
         });
 
         // Reset icon if video is replayed after ending

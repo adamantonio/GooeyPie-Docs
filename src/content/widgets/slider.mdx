@@ -62,11 +62,27 @@ styles:
   
 ---
 
-A Slider is a widget that allows the user to select a value from a range by moving a butto along a track. The slider can be oriented either horizontally or vertically, and it can be configured to snap to specific increments within the range.
+import CodeExample from '../../components/CodeExample.astro';
+
+
+A Slider is a widget that allows the user to select a value from a range by moving a button along a track. The slider can be oriented either horizontally or vertically, and it can be configured to snap to specific increments within the range.
 
 
 ## Examples
 
 ### Volume control
 This examples shows how to use the `on_change` event of a slider to update a label with the current value of the slider.
+<CodeExample
+  name="volume_control"
+  title="Volume Control"
+  mark="volume_slider"
+/>
+
+### Color mixer
+This example shows how to use three sliders to control the red, green, and blue components of a color. The background color of the window is updated in real time as the sliders are moved.
+<CodeExample
+  name="color_mixer"
+  title="Color Mixer"
+  mark={["red_slider", "green_slider", "blue_slider"]}
+/>
 

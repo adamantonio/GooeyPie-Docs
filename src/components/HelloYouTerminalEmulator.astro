@@ -1,0 +1,158 @@
+
+<div class="terminal-wrapper">
+  <div class="terminal-emulator" id="terminal-container" tabindex="0">
+    <div class="terminal-content">
+      <div id="terminal-output"></div>
+      <div id="terminal-input-line">
+        <span class="prompt">&gt;&gt;&gt; What is your name? </span>
+        <span id="terminal-input-display"></span><span class="cursor">_</span>
+      </div>
+    </div>
+    <div id="terminal-restart-prompt" class="dimmed" style="display: none;">
+      (press space to restart)
+    </div>
+  </div>
+  <p class="terminal-hint">Click inside the terminal to start typing!</p>
+</div>
+
+<style>
+  /* Standard scoped styles for the outside wrapper */
+  .terminal-wrapper {
+    margin: 1rem 0 2rem 0;
+  }
+  
+  .terminal-hint {
+    font-size: 0.85rem;
+    color: var(--sl-color-gray-3);
+    text-align: center;
+    margin-top: 8px;
+    font-style: italic;
+  }
+</style>
+
+<style is:global>
+  /* Global styles prefixed with .terminal-emulator so dynamically injected JS HTML perfectly inherits the design */
+  .terminal-emulator {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--sl-color-black);
+    color: var(--sl-color-white);
+    font-family: 'Courier New', Courier, monospace;
+    padding: 20px;
+    border-radius: 8px;
+    min-height: 200px;
+    cursor: text;
+    outline: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    line-height: 1.6;
+    border: 1px solid var(--sl-color-gray-5);
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  }
+
+  .terminal-emulator:focus {
+    border-color: var(--sl-color-accent);
+  }
+
+  /* Force zero margin on all inner lines to prevent Starlight's Markdown CSS from causing vertical layout shifts */
+  .terminal-emulator div {
+    margin: 0 !important;
+    padding: 0;
+  }
+
+  .terminal-emulator .terminal-content {
+    flex-grow: 0; 
+  }
+
+  .terminal-emulator .prompt {
+    color: var(--sl-color-text-accent);
+  }
+
+  .terminal-emulator .cursor {
+    color: var(--sl-color-text-accent); 
+    opacity: 1;
+  }
+
+  .terminal-emulator:focus .cursor {
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .terminal-emulator .dimmed {
+    color: var(--sl-color-gray-3);
+    font-style: italic;
+  }
+
+  #terminal-restart-prompt {
+    margin-top: auto !important;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('terminal-container');
+    const outputDiv = document.getElementById('terminal-output');
+    const inputDisplay = document.getElementById('terminal-input-display');
+    const inputLine = document.getElementById('terminal-input-line');
+    const restartPrompt = document.getElementById('terminal-restart-prompt');
+
+    let currentState = 'INPUT'; 
+    let currentInput = '';
+
+    container.addEventListener('click', () => container.focus());
+
+    function sanitizeInput(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    container.addEventListener('keydown', (e) => {
+      if (e.key === ' ' && e.target === container) {
+        e.preventDefault();
+      }
+
+      if (currentState === 'INPUT') {
+        if (e.key === 'Enter') {
+          const name = currentInput.trim();
+          const sanitizedName = sanitizeInput(name);
+          
+          // Print identical structure so there's no layout shift, and the global CSS grabs the correct color
+          outputDiv.innerHTML += `<div><span class="prompt">&gt;&gt;&gt; What is your name? </span>${sanitizedName}</div>`;
+          
+          if (sanitizedName) {
+            outputDiv.innerHTML += `<div>Hello, ${sanitizedName}!</div>`;
+          } else {
+            outputDiv.innerHTML += `<div>Hello, friend!</div>`;
+          }
+          
+          inputLine.style.display = 'none';
+          restartPrompt.style.display = 'block';
+          
+          currentState = 'FINISHED';
+
+        } else if (e.key === 'Backspace') {
+          currentInput = currentInput.slice(0, -1);
+          inputDisplay.textContent = currentInput;
+        } else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) { 
+          currentInput += e.key;
+          inputDisplay.textContent = currentInput;
+        }
+      } else if (currentState === 'FINISHED') {
+        if (e.key === ' ' || e.code === 'Space') {
+          outputDiv.innerHTML = '';
+          currentInput = '';
+          inputDisplay.textContent = '';
+          
+          inputLine.style.display = 'block';
+          restartPrompt.style.display = 'none';
+          currentState = 'INPUT';
+        }
+      }
+    });
+  });
+</script>
