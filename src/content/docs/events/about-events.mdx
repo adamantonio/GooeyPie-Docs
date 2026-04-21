@@ -6,10 +6,10 @@ description: An overview of how events work
 
 import CodeExample from '../../../components/CodeExample.astro';
 
-Aside from the notable exception of [Buttons](/widgets/button) (see below), when user interacts with a widget, it does not automatically execute any code. But sometimes we want to do exactly that! For example:
-+ When a [Checkbox](/widgets/checkbox) is checked or unchecked.
-+ When the text in a [Textbox](/widgets/textbox) changes.
-+ When a [Slider](/widgets/slider) is moved.
+Aside from the notable exception of [Buttons](/widgets/button) (see below), when a user interacts with a widget, it does not automatically execute any code. But sometimes we want to do exactly that! For example:
++ When a [Checkbox](/widgets/checkbox) is checked or unchecked, we might want to show or hide additional options.
++ When the text in a [Textbox](/widgets/textbox) changes, we might want to update a character count.
++ When a [Slider](/widgets/slider) is moved, we might adjust the volume of music playing in the background.
 
 When events are triggered, an event function is called and sent an `event` object, which contains information about the event.
 
@@ -32,4 +32,5 @@ To set up a widget to respond to events:
   name="event_listeners"
   title="Event Listeners"
   mark={[3,4,6,7,9,10,12,13,23,24,25,26]}
+  zoom={0.5}
 />

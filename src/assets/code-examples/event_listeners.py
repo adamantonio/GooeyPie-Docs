@@ -14,7 +14,7 @@ def mouse_right_clicked(event):
 
 app = gp.GooeyPieApp("Events in GooeyPie")
 
-# Make a blue square for an event targe
+# Make a blue square for an event target
 event_lbl = gp.Label()
 event_lbl.width = 100
 event_lbl.height = 100

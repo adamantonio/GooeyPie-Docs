@@ -64,8 +64,8 @@ Think of a property like a **variable that belongs to a widget**. You don't need
   <thead>
     <tr>
       <th>Action</th>
-      <th>The "Standard" Way</th>
-      <th>The GooeyPie Way</th>
+      <th>The "Standard" Way (methods)</th>
+      <th>The GooeyPie Way (properties)</th>
     </tr>
   </thead>
   <tbody>
@@ -82,11 +82,15 @@ Think of a property like a **variable that belongs to a widget**. You don't need
   </tbody>
 </table>
 
+GooeyPie widgets still have methods for more complex actions, but for the most common tasks, properties make your code cleaner and easier to read. You can get and set values directly without needing to remember specific method names or syntax.
+
 
 ## Event-Driven Programming
 If you're a beginner, this is an important shift in understanding how a program runs. In a standard Python script, the program finishes once it reaches the last line. In GooeyPie, the program enters an **Event Loop**.
 
-1. **Register the Event**: You tell a widget which function to run when something happens using an <code>on_<em>event</em></code> method.
+To set up events in GooeyPie, the process looks like this:
+
+1. **Register the Event**: You tell a widget which function to run when something happens using an <code>.on_<em>event</em></code> method.
 2. **The Function**: You write a function that handles the work.
 3. The Loop: `app.run()` starts the engine.
 
