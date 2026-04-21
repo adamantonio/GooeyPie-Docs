@@ -1,0 +1,35 @@
+---
+title: About Events
+description: An overview of how events work
+
+---
+
+import CodeExample from '../../../components/CodeExample.astro';
+
+Aside from the notable exception of [Buttons](/widgets/button) (see below), when user interacts with a widget, it does not automatically execute any code. But sometimes we want to do exactly that! For example:
++ When a [Checkbox](/widgets/checkbox) is checked or unchecked.
++ When the text in a [Textbox](/widgets/textbox) changes.
++ When a [Slider](/widgets/slider) is moved.
+
+When events are triggered, an event function is called and sent an `event` object, which contains information about the event.
+
+<img
+    src="/images/events/events-overview_dark.svg"
+    data-light="/images/events/events-overview_light.svg"
+    data-dark="/images/events/events-overview_dark.svg"
+    alt="Events are triggered by user interaction with widgets, and cause event functions to be called with an event object as an argument."
+/>
+
+### Buttons are special
+A [Button](/widgets/button) should **always** do something, so the event function for a button press is set when the button is first created. However, you can always just set to this `None` while developing the interface, and then add the event function later when you're ready to make it do something.
+
+## Registering an Event Listener
+To set up a widget to respond to events:
+1. use an appropriate <code>.on_<em>event</em>(event_function)</code> method on the widget, specifying the name of the event function.
+2. Write an **event function** that will be called when the event occurs. This function must accept a single argument for the event object.
+
+<CodeExample
+  name="event_listeners"
+  title="Event Listeners"
+  mark={[3,4,6,7,9,10,12,13,23,24,25,26]}
+/>

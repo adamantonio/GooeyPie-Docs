@@ -1,0 +1,35 @@
+---
+title: The Event Object
+description: Details on the event object that is passed by GooeyPie to event functions
+---
+
+import CodeExample from '../../../components/CodeExample.astro';
+
+
+Whenever an event is triggered, GooeyPie calls the associated event function and passes it an `event` object as an argument. This object contains information about the event that occurred, such as which widget triggered the event, the type of event, and any relevant data (like mouse coordinates for a click event).
+
+<img
+    src="/images/events/events-event-object_dark.svg"
+    data-light="/images/events/events-event-object_light.svg"
+    data-dark="/images/events/events-event-object_dark.svg"
+    alt="When events are triggered, an event function is called and sent an event object, which contains information about the event."
+/>
+
+The `event` object has the following  properties that you can access in your event function to get more information about the event:
+
+| Property | Type | Description |
+| --- | --- | --- |
+| `.widget` | Widget object | The widget that triggered the event. This allows you to access the properties of the widget that was interacted with. |
+| `.name` | String | A string describing the type of event that occurred (e.g., `"click"`, `"change"`, `"key_press"`). |
+| `.key` | String | For keyboard events, this property contains the key that was pressed. |
+| `.x` | Integer | For mouse events, this property contains the x-coordinate of the mouse cursor at the time of the event relative to the widget. |
+| `.y` | Integer | For mouse events, this property contains the y-coordinate of the mouse cursor at the time of the event relative to the widget. |
+
+### Using the event object
+In this example, we have two buttons that both update the value of a label. Instead of writing two separate event functions, we can use the `event` object to determine which button was clicked and update the label accordingly.
+
+<CodeExample
+  name="hello_goodbye"
+  title="Hello Goodbye"
+  mark={[6,7,8,9,10]}
+/>

@@ -1,0 +1,96 @@
+---
+title: Event types
+description: A list of the events supported by GooeyPie
+---
+
+GooeyPie supports a variety of events that can be triggered by user interactions with widgets. Here is the list of events you can use in your GooeyPie apps:
+
+<table>
+<thead>
+    <tr>
+        <th>Method</th>
+        <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <th colspan="2">Mouse buttons</th>
+    </tr>
+    <tr>
+        <td>`.on_click(event_function)`</td>
+        <td>Called when the user clicks the widget with the primary mouse button.</td>
+    </tr>
+    <tr>
+        <td>`.on_double_click(event_function)`</td>
+        <td>Called when the user rapidly clicks the widget twice in succession.</td>
+    </tr>
+    <tr>
+        <td>`.on_right_click(event_function)`</td>
+        <td>Called when the user clicks the widget with the right mouse button.</td>
+    </tr>
+    <tr>
+        <td>`.on_middle_click(event_function)`</td>
+        <td>Called when the user clicks the widget with the middle mouse button (or scroll wheel).</td>
+    </tr>
+    <tr>
+        <td>`.on_mouse_down(event_function)`</td>
+        <td>Called the moment the primary mouse button is pressed down over the widget.</td>
+    </tr>
+    <tr>
+        <td>`.on_mouse_up(event_function)`</td>
+        <td>Called the moment the primary mouse button is released over the widget.</td>
+    </tr>
+    
+    <tr>
+        <th colspan="2">Mouse movement</th>
+    </tr>
+    <tr>
+        <td>`.on_mouse_enter(event_function)`</td>
+        <td>Called when the mouse cursor moves into the widget's area.</td>
+    </tr>
+    <tr>
+        <td>`.on_mouse_leave(event_function)`</td>
+        <td>Called when the mouse cursor moves out of the widget's area.</td>
+    </tr>
+
+    <tr>
+        <th colspan="2">Keyboard</th>
+    </tr>
+    <tr>
+        <td>`.on_key_press(event_function)`</td>
+        <td>Called when the user presses a key while the widget is focused.</td>
+    </tr>
+
+    <tr>
+        <th colspan="2">Focus</th>
+    </tr>
+    <tr>
+        <td>`.on_focus_gained(event_function)`</td>
+        <td>Called when the widget becomes the currently selected element on the screen, ready to receive keyboard interaction. Note: not all widgets are capable of receiving focus.</td>
+    </tr>
+    <tr>
+        <td>`.on_focus_lost(event_function)`</td>
+        <td>Called when the widget is no longer the active target for keyboard input.</td>
+    </tr>
+
+    <tr>
+        <th colspan="2">Value</th>
+    </tr>
+    <tr>
+        <td>`.on_change(event_function)`</td>
+        <td>
+            Available on the following widgets:
+            <ul>
+                <li><a href="/widgets/buttongroup">ButtonGroup</a> - when the selected button in the group changes.</li>
+                <li><a href="/widgets/checkbox">Checkbox</a> - when a checkbox is checked/unchecked.</li>
+                <li><a href="/widgets/dropdown">Dropdown</a> and <a href="/widgets/listbox">Listbox</a> - when the selected item changes.</li>
+                <li><a href="/widgets/entry">Entry</a>, <a href="/widgets/textbox">Textbox</a> and <a href="/widgets/secret">Secret</a> - when the text is changed.</li>
+                <li><a href="/widgets/radiogroup">RadioGroup</a> - when a radio button is selected or the selection changes.</li>
+                <li><a href="/widgets/slider">Slider</a> - when the slider value is moved.</li>
+                <li><a href="/widgets/switch">Switch</a> - when the switch is toggled.</li>
+            </ul>
+        </td>
+    </tr>
+
+</tbody>
+</table>

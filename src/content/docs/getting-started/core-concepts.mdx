@@ -1,0 +1,101 @@
+---
+title: Core Concepts
+description: An outline of the main aspects of creating apps with GooeyPie
+---
+
+In a standard Python script, code runs in a straight line from top to bottom. It asks a question, waits for an answer, and exits as soon as it reaches the last line.
+
+Creating a GooeyPie app changes this flow. Instead of a linear script, your program becomes a persistent window - an interactive environment that stays open, listening and waiting for the user to trigger an action.
+
+Whether you are a student or an experienced developer, understanding these four fundamental concepts will help you transition from terminal scripts to graphical apps.
+
+
+## Widgets as Building Blocks
+
+<img
+    src="/images/getting-started/concepts-widgets_dark.svg"
+    data-light="/images/getting-started/concepts-widgets_light.svg"
+    data-dark="/images/getting-started/concepts-widgets_dark.svg"
+    alt="A collection of widgets - labels, an entry, a textbox, a slider, a checkbox, and a button"
+    class="centered width-50"
+/>
+
+Everything you see in a GooeyPie app is a **Widget**. Instead of using `print()` to show information or `input()` to get it, you use:
++ **Labels** to display text.
++ **Entries** to for single line typing or **Textboxes** for longer text.
++ **Dropdowns**, **RadioGroups**, **Listboxes** and [more](/widget-gallery) for making choices and selections.
++ **Buttons** for actions.
+
+
+You create these objects first, then use `app.add(widget, column, row)` to place them on to the window:
+
+<img
+    src="/images/getting-started/concepts-widgets-on-window_dark.svg"
+    data-light="/images/getting-started/concepts-widgets-on-window_light.svg"
+    data-dark="/images/getting-started/concepts-widgets-on-window_dark.svg"
+    alt="The widgets placed on to an application window"
+    class="centered width-50"
+/>
+
+
+## The Grid Layout
+In a GooeyPie window, the interface is organized as a grid system. Every widget is placed at a specific column and row (or <span class="math">(<i>x</i>, <i>y</i>)</span> if you're feeling mathematically inclined!)
++ **Columns** go across (1, 2, 3, ...) 
++ **Rows** go down (1, 2, 3, ...)
+
+<img
+    src="/images/getting-started/concepts-grid_dark.svg"
+    data-light="/images/getting-started/concepts-grid_light.svg"
+    data-dark="/images/getting-started/concepts-grid_dark.svg"
+    alt="The window showing the grid system used by GooeyPie"
+    class="centered width-67"
+/>
+
+
+You can even make widgets "stretch" across multiple columns or rows using `column_span` and `row_span` when adding widgets, and you can control their alignment and whether or not they expand to fill the space available.
+
+
+## Properties vs Methods
+Information associated with a widget - like the text in an Entry, or the selected item in a RadioGroup - sometimes needs to be accessed, and other times needs to be modified. GooeyPie simplifies this by using **properties**.
+
+Think of a property like a **variable that belongs to a widget**. You don't need a fancy function to change what a label says - you just treat its `.text` property like a normal variable.
+
+<table>
+  <thead>
+    <tr>
+      <th>Action</th>
+      <th>The "Standard" Way</th>
+      <th>The GooeyPie Way</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Get Text</strong></td>
+      <td>`val = entry.get_text()`</td>
+      <td>`val = entry.text`</td>
+    </tr>
+    <tr>
+      <td><strong>Set Text</strong></td>
+      <td>`label.set_text("Hi")`</td>
+      <td>`label.text = "Hi"`</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## Event-Driven Programming
+If you're a beginner, this is an important shift in understanding how a program runs. In a standard Python script, the program finishes once it reaches the last line. In GooeyPie, the program enters an **Event Loop**.
+
+1. **Register the Event**: You tell a widget which function to run when something happens using an <code>on_<em>event</em></code> method.
+2. **The Function**: You write a function that handles the work.
+3. The Loop: `app.run()` starts the engine.
+
+The app stays open, "listening" for clicks, keypresses or changes, and only runs your functions when those events happen.
+
+<img
+    src="/images/getting-started/concepts-event_dark.svg"
+    data-light="/images/getting-started/concepts-event_light.svg"
+    data-dark="/images/getting-started/concepts-event_dark.svg"
+    alt="A mouse clicking a button in the application"
+    class="centered width-50"
+/>

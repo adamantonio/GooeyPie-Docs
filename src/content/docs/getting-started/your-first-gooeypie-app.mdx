@@ -10,7 +10,7 @@ Let's get started with your first GooeyPie app! We'll create a simple applicatio
 
 When you first started learning Python, you might have used `input()` and `print()` to write something like this:
 
-```python title="hello_you.py"
+```python title="hello_you_terminal.py"
 name = input("What is your name? ")
 
 if name:
@@ -113,7 +113,7 @@ Now we need to write the code that runs when we click the button. Add the functi
 
 Whenever the user clicks the button, the `update_greeting()` function will be called.
 
-```python title="hello_you.py" ins={3-8, 17} del={16}
+```python title="hello_you.py" ins={3-8, 16} mark="update_greeting"
 import gooeypie as gp
 
 def update_greeting(event):
@@ -129,7 +129,6 @@ app = gp.GooeyPieApp("Hello, You!")
 # Create widgets
 question_lbl = gp.Label("What's your name?")
 name_entry = gp.Entry()
-say_hello_btn = gp.Button("Say Hello", None)
 say_hello_btn = gp.Button("Say Hello", update_greeting)
 greeting_lbl = gp.Label()
 
@@ -159,4 +158,6 @@ And you're done! If all goes well, you should have created your first, fully fun
 
 
 ## What next?
-Check out [all of the widgets you can use](/widget-gallery) in GooeyPie, learn the ins and outs of layout, and see how we can add more interactivity to our apps with events.
+Read about the [core concepts](/getting-started/core-concepts) to learn more about the "philosophy" of GooeyPie.
+
+Then, check out [all of the widgets you can use](/widget-gallery) in GooeyPie, learn the ins and outs of layout, and see how we can add more interactivity to our apps with events.

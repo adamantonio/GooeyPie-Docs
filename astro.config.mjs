@@ -30,6 +30,7 @@ export default defineConfig({
                     items: [
                         { label: 'Installation', slug: 'getting-started/installation' },
                         { label: 'Your First App', slug: 'getting-started/your-first-gooeypie-app' },
+                        { label: 'Core Concepts', slug: 'getting-started/core-concepts' },
                     ],
                 },
                 {
@@ -52,6 +53,14 @@ export default defineConfig({
                         { label: 'Textbox', link: '/widgets/textbox' },
                     ],
                 },
+                {
+                    label: 'Events',
+                    items: [
+                        { label: 'About Events', slug: 'events/about-events' },
+                        { label: 'Event Types', slug: 'events/event-types' },
+                        { label: 'The Event Object', slug: 'events/the-event-object' },
+                    ],
+                }
             ],
         }),
     ],

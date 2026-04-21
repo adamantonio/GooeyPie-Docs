@@ -9,3 +9,31 @@
     scroll-margin-top: 2rem;
 }
 
+
+.math {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+/* Utility classes */
+.centered {
+    display: block;
+    margin-inline: auto;
+}
+
+.width-50 {
+    width: 50%;
+}
+
+.width-67 {
+    width: 67%;
+}
+
+.width-75 {
+    width: 75%;
+}
+
+/* Table header styling for the event types table */
+table tbody th[colspan="2"] {
+    font-variant: all-small-caps;
+    opacity: 0.6;
+}
