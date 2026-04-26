@@ -60,7 +60,13 @@ export default defineConfig({
                         { label: 'Event Types', slug: 'events/event-types' },
                         { label: 'The Event Object', slug: 'events/the-event-object' },
                     ],
-                }
+                },
+                {
+                    label: 'Layout',
+                    items: [
+                        { label: 'The grid system', slug: 'layout/the-grid-system' },
+                    ],
+                },
             ],
         }),
     ],

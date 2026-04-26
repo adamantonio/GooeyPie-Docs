@@ -1,0 +1,74 @@
+---
+title: The Grid System
+description: An overview of how the grid system works in GooeyPie, and how to use it to create your app's layout, including column and row spanning, alignment, expanding and weights.
+---
+
+import CodeExample from '../../../components/CodeExample.astro';
+
+In GooeyPie, you organize your app's layout using a grid system.
++ **Columns** go across (1, 2, 3, ...)
++ **Rows** go down (1, 2, 3, ...)
+
+<img
+    src="/images/getting-started/concepts-grid_dark.svg"
+    data-light="/images/getting-started/concepts-grid_light.svg"
+    data-dark="/images/getting-started/concepts-grid_dark.svg"
+    alt="The window showing the grid system used by GooeyPie"
+    class="centered width-67"
+/>
+
+To add a widget to the window, you use the `add()` method, and specify the column and row for that widget:
+
+```python
+app.add(widget, column, row)
+```
+
+<img
+    src="/images/layout/layout-grid-coordinates_dark.svg"
+    data-light="/images/layout/layout-grid-coordinates_light.svg"
+    data-dark="/images/layout/layout-grid-coordinates_dark.svg"
+    alt="The window showing the grid system used by GooeyPie"
+    class="centered"
+/>
+
+
+## Spanning Columns and Rows
+Sometimes you want a widget to stretch across multiple columns or rows. You can do this using the `column_span` and `row_span` parameters when adding a widget:
+
+```python
+app.add(widget, column, row, column_span=2, row_span=2)
+```
+
+This will make the widget span across 2 columns and 2 rows, allowing it to take up more space in the layout. You can adjust the `column_span` and `row_span` values to fit your design needs.
+
+### Spanning Example
+
+<CodeExample
+  name="spanning-rows-and-columns"
+  title="Spanning Rows and Columns"
+  mark={["column_span=2", "row_span=2"]}
+  static
+/>
+
+
+## Alignment and expansion
+Once a widget is placed in a grid cell, you can control how it behaves _if that cell happens to be larger than the widget itself_.
+
+### Alignment: "Where do I sit?"
+Alignment tells the widget where to place itself itself within the space of its cell.
+
+|Argument|Purpose|Allowable Values|
+|---|---|---|
+|`align_horizontal`|Left-to-right position|`"left"`, `"center"` or `"right"`
+|`align_vertical`|Left-to-right position|`"top"`, `"middle"` or `"bottom"`
+
+
+### Expansion: "Should I stretch?"
+Expansion tells the widget to stop being its natural size and instead grow until it touches the edges of its cell.
+
++ `expand_horizontal`. Set to `True` to stretch the widget to the full **width** of the cell.
++ `expand_vertical`. Set to `True` to stretch the widget to the full **height** of the cell.
+
+
+
+

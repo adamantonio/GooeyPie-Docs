@@ -26,7 +26,7 @@ And if you were to run that code, it would look something like this:
 
 To turn this into a GUI (Graphical User Interface) app using GooeyPie, we need to swap out those text commands for GooeyPie **widgets**, add them to a **window**, and set up some **event handling** to make it interactive.
 
-Before continuing, make sure you've [installed](installation) the GooeyPie library.
+Before continuing, make sure you've [installed](/getting-started/installation) the GooeyPie library.
 
 ## Designing the interface
 Let's consider the interface of our app. We want a window with the following 4 widgets:
@@ -81,7 +81,7 @@ Now if you run this code (and you should!), you'll notice that we still have a b
 
 
 ## Adding widgets to the window
-Widgets are always added to Windows and other containers in a grid. We have to specify the x and y location (column and row) for each widget. Let's do that now:
+Widgets are always added to Windows and other containers in a grid. We have to specify the column and row for each widget. Let's do that now:
 
 
 ```python title="hello_you.py" ins={14-18}
@@ -106,7 +106,7 @@ app.add(greeting_lbl, 1, 4)
 
 app.run()
 ```
-Since all our widgets are in a single column, the first position argument in `add()` is always 1.
+Since all our widgets are in a single column, the first position argument in `add()` above is 1.
 
 ## Event handling
 Now we need to write the code that runs when we click the button. Add the function below and replace the `None` that we specified when we created the button with the name of the function.
