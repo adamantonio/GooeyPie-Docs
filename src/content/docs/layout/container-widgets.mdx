@@ -1,0 +1,76 @@
+---
+title: Container Widgets
+description: An overview of how to use container widgets in GooeyPie to organize your app's layout.
+---
+
+import CodeExample from '../../../components/CodeExample.astro';
+
+In GooeyPie, you aren't limited to a single grid on your main window. You can use Container Widgets to group other widgets together and create more organized, sophisticated layouts.
+
+## The Power of Nested Grids
+
+The most important concept to understand is that each container **has its own grid**. You use the container's `add()` method to place widgets inside it, and then you use `app.add()` to place the container itself onto the main window's grid. 
+
+This means you can have a grid inside a grid, and even a grid inside a grid inside a grid! This allows you to create complex layouts by nesting containers within each other.
+
+## Types of Container Widgets
+
+### Frame
+```python
+my_frame = gp.Frame()
+```
+A **Frame** is a container used for visually grouping widgets together. Use a Frame when you want to show the user that a set of inputs or labels belong to the same category, like "User Settings" or "Game Stats".
+
+#### Example: Simple Quiz
+In this example, we use a Frame to group together the question and the answer checkboxes for a simple quiz question. Notice that the Frame has its own grid, and we use `question_frame.add()` to place the question label and checkboxes inside it, but later we use `app.add()` to place the Frame itself onto the main window.
+<CodeExample
+  name="simple_quiz"
+  title="Simple Quiz"
+  mark={["question_frame", "frame"]}
+/>
+
+The image below shows the grid of the main window and the frame's grid, with the widgets placed in their respective cells. The Frame itself is placed in column 1, row 1 of the main window's grid.
+
+<img
+    src="/images/layout/app-grid-and-frame-grid_dark.svg"
+    data-light="/images/layout/app-grid-and-frame-grid_light.svg"
+    data-dark="/images/layout/app-grid-and-frame-grid_dark.svg"
+    alt="Diagram showing the grid of the main window and the grid of a frame, with widgets placed in their respective cells"
+    class="centered"
+/>
+
+
+
+### Scrollable Frame
+```python
+my_scrollable_frame = gp.ScrollableFrame()
+```
+A **ScrollableFrame** is just like a standard Frame, but it **includes a scrollbar**. This is perfect for when you have a long list of widgets that won't fit vertically on the screen at once.
+
+### Container
+```python
+my_container = gp.Container()
+```
+
+A **Container** is essentially an invisible frame. It doesn't have any visual styling or scrolling behavior. Use a Container when you just want to group widgets together for layout purposes, without needing to visually separate them from the rest of the interface.
+
+## Container Properties
+
+|Name|Type|Description|
+|---|---|---|
+|`.width`|`int`|The width of the container in pixels.|
+|`.height`|`int`|The height of the container in pixels.|
+
+## Container Styling Options
+
+|Name|Description|Default|
+|---|---|---|
+|`.style.bg_color`|The background color of the container.|`"transparent"`|
+|`.style.border_width`|The width of the container's border in pixels.|`0`|
+|`.style.border_color`|The color of the container's border.|`"transparent"`|
+
+
+
+As with regular widgets, use a combination of column and row spanning, alignment and expansion to control how widgets are arranged inside your containers.
+
+To make Container Widgets expand to fill the space of their cells, use a combination of column and row weights on the container's grid, and set the container to expand horizontally and/or vertically.

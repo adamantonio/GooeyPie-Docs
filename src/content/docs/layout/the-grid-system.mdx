@@ -4,6 +4,7 @@ description: An overview of how the grid system works in GooeyPie, and how to us
 ---
 
 import CodeExample from '../../../components/CodeExample.astro';
+import { Aside } from '@astrojs/starlight/components';
 
 In GooeyPie, you organize your app's layout using a grid system.
 + **Columns** go across (1, 2, 3, ...)
@@ -48,6 +49,7 @@ This will make the widget span across 2 columns and 2 rows, allowing it to take 
   title="Spanning Rows and Columns"
   mark={["column_span=2", "row_span=2"]}
   static
+  zoom="1"
 />
 
 
@@ -60,7 +62,7 @@ Alignment tells the widget where to place itself itself within the space of its 
 |Argument|Purpose|Allowable Values|
 |---|---|---|
 |`align_horizontal`|Left-to-right position|`"left"`, `"center"` or `"right"`
-|`align_vertical`|Left-to-right position|`"top"`, `"middle"` or `"bottom"`
+|`align_vertical`|Top-to-bottom position|`"top"`, `"center"` or `"bottom"`
 
 
 ### Expansion: "Should I stretch?"
@@ -70,5 +72,51 @@ Expansion tells the widget to stop being its natural size and instead grow until
 + `expand_vertical`. Set to `True` to stretch the widget to the full **height** of the cell.
 
 
+## Column and Row Weights
 
+When you resize a window, GooeyPie needs to know which columns and rows should grow to fill the extra space. We do this using weights.
+
+Think of a weight like a **spring** placed inside a column or row:
+
++ **Columns have "Springs"**: By default, all columns have a weight of 1. They will automatically push against the window edges to fill space evenly. But keep in mind, the widgets themselves will not automatically grow to fill that space!
+
++ **Rows are "Tight"**: By default, rows have a weight of 0. They have no springs; they stay as small as possible to fit your widgets unless you tell them to grow.
+
+### How to Set Weights
+
+To control how your grid grows, set the weights for the entire grid at once. This gives you a clear "map" of your layout in one line of code.
+
+You can set the weight of columns and rows using the `set_column_weights()` and `set_row_weights()` methods:
+
+```python
+app.set_column_weights(column1_weight, column2_weight, ...)
+app.set_row_weights(row1_weight, row2_weight, ...)  
+```
++ A weight of 1 means the column or row will grow to fill available space.
++ A weight of 0 means it will not grow at all.
++ You can use any positive number for weights, and they will be distributed proportionally. For example, if you have two columns with weights 1 and 2, the second column will grow twice as much as the first when the window is resized.
+
+
+<Aside type="tip" title="Always set your weights last!" >
+When you're building your layout, make sure you've added all your widgets _before_ settting the column and row weights. This way, you can see how everything fits together before deciding which columns and rows should grow when the window is resized.
+</Aside>
+
+### The "Magic Combo" for Filling Space
+
+If you want a widget to fill up the space available in its cell, you need to use two things together:
+
+1. A weight > 0: This makes the Column or Row grow .
+2. An expansion (`expand_horizontal` or `expand_vertical`): This makes the Widget stretch to fill that newly grown space.
+
+Without expansion, the cell grows, but the widget stays small in the middle!
+
+
+### Example: A Message Form
+In this example, we want the second column to grow when the window is resized horizontally, so that the Entry and Textbox stretch to fill the space. We also want the Textbox to grow vertically, so it takes up more space as the window gets taller.
+
+<CodeExample
+  name="message_form"
+  title="Message Form"
+  mark={["set_column_weights", "set_row_weights", "expand_horizontal", "expand_vertical"]}
+/>
 

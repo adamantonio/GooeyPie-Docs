@@ -113,5 +113,66 @@ const imageSrcDark = `/images/code-examples/${name}_dark.png`;
     image-rendering: crisp-edges;
   }
 
-  /* ... Keep all other .controls-overlay, .progress-container, etc. styles ... */
+  .controls-overlay {
+    background-color: #000000;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-content: center;
+    gap: 1rem;
+    width: 75%;
+    margin-inline: auto;
+    margin-top: 0.5rem;
+  }
+
+  .video-player:hover .controls-overlay{
+    opacity: 1;
+  }
+
+  /* Progress Bar & Seek Slider */
+  .progress-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+  }
+  
+  progress {
+    width: 100%;
+    height: 4px;
+    appearance: none;
+    border: none;
+    background: #444;
+    border-radius: 2px;
+  }
+
+  /* Starlight Brand Color for Progress */
+  progress::-webkit-progress-value { background-color: #60a5fa; }
+  progress::-moz-progress-bar { background-color: #60a5fa; }
+
+  .seek-slider {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0; /* Invisible but clickable/draggable */
+    cursor: pointer;
+    height: 100%;
+    margin: 0;
+  }
+
+  .play-btn {
+    background: none;
+    border: none;
+    /* color: var(--sl-color-white); */
+    color: #ffffff !important;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0;
+  }
+
+  .play-btn:hover {
+    /* color: var(--sl-color-accent);  */
+    color: #60a5fa !important;
+  }
 </style>
