@@ -1,0 +1,69 @@
+---
+title: Additional Windows
+description: An overview of how to create and manage additional windows in GooeyPie, beyond the main window.
+
+---
+
+import CodeExample from '../../../components/CodeExample.astro';
+import { Code } from 'astro:components';
+
+While your app is the main stage, sometimes you need a side-room for things like Settings, Help, or Edit screens. These are called sub-windows.
+
+## Creating a Window
+You create a new window with the `gp.Window()` constructor, which takes a title as an argument:
+```python
+my_window = gp.Window(title)
+```
+This creates a new window with the specified title. You can then add widgets to this window using `my_window.add()`, just like you do with the main window.
+
+
+## Familiar features
+The great news is that a sub-window acts almost exactly like your [main window](/windows/the-main-window). You can use all these properties you already know:
+
++ Settings: `.resizable_horizontal`, `.resizable_vertical`, `.set_icon()`
++ Sizing: `.width`, `.height`, `set_size(w, h)`
+
+
+## Showing and Hiding Windows
+Here is the big difference: Sub-windows **always start hidden**. They wait in the background until you tell them to appear.
+
+| Method | What happens? |
+| --- | --- |
+| `.show()` | Makes the window visible to the user. |
+| `.hide()` | Tucks the window away. It's still "alive", just invisible. |
+| `.show_on_top()` | Shows the window and forces it to the front of all other windows. |
+
+**Note:** If a user clicks the "X" on a sub-window, GooeyPie doesn't destroy the window or quit the whole app - it just calls `.hide()` for you!
+
+### Example: Multiple Windows
+In this example, we have two buttons on the main window that open two different sub-windows. The "Open on top" button opens a window that will always stay in front of the main window, while the "Open other window" button opens a regular sub-window that can be hidden behind the main window.
+<CodeExample
+  name="window_show_and_hide"
+  title="Showing and hiding windows"
+  mark={["other_window", "on_top_window"]}
+/>
+
+
+## Sub-window Events
+Because sub-windows are are only ever hidden and not destroyed, re-using a sub-window can lead to old data still being there when you show it again. To fix this, sub-windows have two special event listeners:
+
+<br />
+```python
+my_window.on_show(my_function)
+```
+Runs a function right as the window is appearing. Use this to clear out old data or reset sliders so the window looks brand new every time it opens.
+
+<br />
+```python
+my_window.on_hide(my_function)
+```
+Runs a function right as the window is closed/hidden. This is perfect for auto-saving changes.
+
+## Summary: App vs Windows
+| Feature | Main Window | Sub-windows |
+| --- | --- | --- |
+| How to create | `app = gp.GooeyPieApp('My App')` | `my_window = gp.Window('My Window')` |
+| Starts visible? | Yes, when `run()` is called. | No, starts hidden. Must call `show()`. |
+| Closing with "X" button | Quits the entire program. | Just hides that window. |
+| Special Events | `on_load()`, `on_close()` | `on_show()`, `on_hide()` |
+

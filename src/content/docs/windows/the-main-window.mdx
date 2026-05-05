@@ -1,0 +1,135 @@
+---
+title: The Main Window
+description: An overview of the main window in GooeyPie, which is the root container for all your widgets and the starting point for building your app's interface.
+
+---
+
+import CodeExample from '../../../components/CodeExample.astro';
+import { Code } from 'astro:components';
+
+In GooeyPie, the Main Window is the heart of your application. When you create your app using <Code code="app = gp.GooeyPieApp('My App')" lang="py" inline themes={{ light: 'github-light', dark: 'github-dark' }} />, you aren't just making a window, you're setting up the entire engine that keeps your program running.
+
+Because the `app` object represents both the window and the application itself, this is where you'll control things like the title, the size of the screen, and even how the program shuts down.
+
+
+## Appearance and Settings
+
+Think of these as the "look and feel" variables for your app. You can change these at any time to update your window's appearance.
+
+After you have created your app with <Code code="app = gp.GooeyPieApp('My App')" lang="py" inline themes={{ light: 'github-light', dark: 'github-dark' }} />, you can access the following properties to customize your main window:
+
+| Property | Type | Description |
+| --- | --- | --- |
+| `.theme` | string | The color theme of the app, which can be set to `"light"`, `"dark"`, or `"system"` (which follows the system theme). Default is `"system"`. |
+| `.title` | string | The title of your app, which appears in the title bar of the window. |
+| `.width` | integer | The width of the window in pixels. |
+| `.height` | integer | The height of the window in pixels. |
+| `.resizable_horizontal` | boolean | Whether the user can make the window wider or narrower. Default is `True`. |
+| `.resizable_vertical` | boolean | Whether the user can make the window taller or shorter. Default is `True`. |
+
+:::tip[Try the Theme Toggle!]
+All of the example apps you see on this site - both the videos and the images - are connected to the website's theme! 
+
+Try clicking the sun/moon icon at the top of the page to switch between Light and Dark mode. It is a fantastic way to see exactly how GooeyPie widgets look and behave in both styles by default.
+:::
+
+### Setting the window icon
+```python
+app.set_icon(icon_file)
+```
+Sets a custom icon for your app's window, where `icon_file` is the path and filename of the image to be displayed, relative to the current file.
+
+
+## Window Actions
+
+Sometimes you need to tell the window to do something specific, rather than just changing a setting.
+
+<br />
+```python
+app.set_size(width, height)
+```
+A quick way to change the window's dimensions all at once.
+
+<br />
+```python
+app.copy_to_clipboard(text)
+```
+Takes whatever text you give it and saves it to the user's system clipboard (so they can paste it elsewhere!).
+
+
+## Handling Window Events
+
+Just like widgets have events (like clicking a button), the app itself has "life cycle" events.
+
+<br />
+
+```python
+app.on_load(my_load_function)
+```
+This tells the app to run the given function the moment the window appears on the screen.
+
+<br /> 
+
+```python
+app.on_quit(my_quit_function)
+```
+This is like a "safety check" before the app closes. The function you use must return `True` to let the app close, or `False` to keep it open. This is perfect for asking "Are you sure you want to exit?" or for checking if the user has unsaved work before they leave.
+
+<br /> 
+
+```python
+app.quit()
+```
+The standard way to close your app through code. It will still trigger your `.on_quit` function if you've set one.
+
+<br /> 
+
+```python
+app.force_quit()
+```
+Use this if you need to shut down immediately without asking any questions!
+
+
+## Timeouts and Intervals
+Usually, your app does things in response to user actions like clicking a button, but sometimes you want something to happen automatically after a certain amount of time has passed. That's where timer methods come in!
+
+### Setting a timeout
+Use a timeout when you want to wait a bit before doing something once.
+
+<br />
+
+```python
+timeout_id = app.set_timeout(time, my_function)
+```
+This will call `my_function` **_once_** after a `time` millisecond delay. The `set_timeout` method returns an `id` that you can use to cancel the timeout if needed.
+
+<br />
+
+```python
+app.clear_timeout(timeout_id)
+```
+This will cancel the timeout with the given `timeout_id`. If the function has already executed, this will have no effect.
+
+
+### Setting an interval
+Use an interval when you want to do something repeatedly at a regular time interval.
+```python
+interval_id = app.set_interval(time, my_function)
+```
+This will call `my_function` **_repeatedly_** every `time` milliseconds. Like `set_timeout`, it returns an `id` that you can use to stop the interval.
+
+<br />
+
+```python
+app.clear_interval(interval_id)
+```
+This will cancel the interval with the given `interval_id`.
+
+
+## The Final Step
+Don't forget: no matter how many properties you set, your window won't actually appear until you call:
+```python
+app.run()
+```
+
+

@@ -68,6 +68,13 @@ export default defineConfig({
                         { label: 'Container Widgets', slug: 'layout/container-widgets' },
                         { label: 'Tabbed Layouts', slug: 'layout/tabbed-layouts' },
                     ],
+                },                
+                {
+                    label: 'Windows and Dialogs',
+                    items: [
+                        { label: 'The Main Window', slug: 'windows/the-main-window' },
+                        { label: 'Additional Windows', slug: 'windows/additional-windows' },
+                    ],
                 },
             ],
         }),
