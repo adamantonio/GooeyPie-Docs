@@ -1,0 +1,1 @@
+app.alert("Victory!", "You reached the high score!", "info")

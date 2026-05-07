@@ -1,0 +1,124 @@
+---
+title: Popup Windows
+description: An overview of popup windows in GooeyPie, which are modal dialog windows that can be displayed on top of the main window.
+
+---
+
+import CodeExample from '../../../components/CodeExample.astro';
+
+
+
+## Popups and Dialogs
+
+Sometimes your app needs to stop everything to tell the user something important or ask a quick question. In GooeyPie, we use **Popups** (also called modal dialogs) for this.These windows "float" on top of your app and must be dismissed before the user can go back to the main window.
+
+### Choosing a Category
+Every popup requires a **category**. This decides which icon is displayed and helps the user understand the "vibe" of the message:
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">Value</th>
+      <th align="center">Icon</th>
+      <th align="left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>`'info'`</td>
+      <td align="center" style="vertical-align: middle;">
+        <img
+            src="https://raw.githubusercontent.com/adamantonio/GooeyPie/main/gooeypie/assets/images/info_dark.png"
+            data-light="https://raw.githubusercontent.com/adamantonio/GooeyPie/main/gooeypie/assets/images/info_light.png"
+            data-dark="https://raw.githubusercontent.com/adamantonio/GooeyPie/main/gooeypie/assets/images/info_dark.png"
+            width="32" style="display: block; margin: auto;" />
+      </td>
+      <td>General information or updates.</td>
+    </tr>
+    <tr>
+      <td>`'warning'`</td>
+      <td align="center" style="vertical-align: middle;">
+        <img
+            src="https://raw.githubusercontent.com/adamantonio/GooeyPie/main/gooeypie/assets/images/warning_dark.png"
+            data-light="https://raw.githubusercontent.com/adamantonio/GooeyPie/main/gooeypie/assets/images/warning_light.png"
+            data-dark="https://raw.githubusercontent.com/adamantonio/GooeyPie/main/gooeypie/assets/images/warning_dark.png"
+            width="32" style="display: block; margin: auto;" />
+      </td>
+      <td>Alerts that require user caution.</td>
+    </tr>
+    <tr>
+      <td>`'error'`</td>
+      <td align="center" style="vertical-align: middle;">
+        <img
+            src="https://raw.githubusercontent.com/adamantonio/GooeyPie/main/gooeypie/assets/images/error_dark.png"
+            data-light="https://raw.githubusercontent.com/adamantonio/GooeyPie/main/gooeypie/assets/images/error_light.png"
+            data-dark="https://raw.githubusercontent.com/adamantonio/GooeyPie/main/gooeypie/assets/images/error_dark.png"
+            width="32" style="display: block; margin: auto;" />
+      </td>
+      <td>Indicates a problem that has occurred.</td>
+    </tr>
+    <tr>
+      <td>`'question'`</td>
+      <td align="center" style="vertical-align: middle;">
+        <img
+            src="https://raw.githubusercontent.com/adamantonio/GooeyPie/main/gooeypie/assets/images/question_dark.png"
+            data-light="https://raw.githubusercontent.com/adamantonio/GooeyPie/main/gooeypie/assets/images/question_light.png"
+            data-dark="https://raw.githubusercontent.com/adamantonio/GooeyPie/main/gooeypie/assets/images/question_dark.png"
+            width="32" style="display: block; margin: auto;" />
+      </td>
+      <td>Used when asking the user to make a choice.</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+### Simple Alerts
+Use an alert when you just want to give information and only need the user to click **"OK"**.
+
+<CodeExample
+  name="snippet_alert"
+  title="Simple Alert"
+  hideFilename
+  static
+  zoom="0.67"
+/>
+
+**Note:** The `alert()` method doesn't return any value because there's only one button to click!.
+
+
+
+### Asking Questions
+These popups return a value based on what the user clicks. Here's a quick reference for the different question popups:
+
+| Method | Buttons Shown | Returns... |
+| :--- | :--- | :--- |
+| `app.ask_yes_no()` | **Yes**, **No** | `True` (Yes) or `False` (No) |
+| `app.ask_ok_cancel()` | **OK**, **Cancel** | `True` (OK) or `False` (Cancel) |
+| `app.ask_yes_no_cancel()` | **Yes**, **No**, **Cancel** | `True` (Yes), `False` (No), or `None` (Cancel) |
+
+
+<CodeExample
+  name="snippet_warning"
+  title="Warning Popup"
+  hideFilename
+  static
+  zoom="0.67"
+/>
+
+:::tip[Popups are launched from any window]
+The examples on this page all use `app` to launch the popups, but you can (and should!) call these methods from the relevant window in your app because when the user dismisses the popup, they are returned to the window from which the popup was launched. So if you have a window called `edit_window` and you need an alert, you can do `edit_window.alert(...)` 
+:::
+
+
+### Example: The "Are you sure?" Check
+A common use for `ask_yes_no` is making sure a user actually wants to quit. You can combine this with the `on_quit` method of your app.
+
+```python
+def confirm_exit(event):
+    # This popup returns True or False
+    should_exit = app.ask_yes_no("Confirm", "Do you really want to quit?", "question")
+    return should_exit
+
+app.on_quit(confirm_exit)
+```

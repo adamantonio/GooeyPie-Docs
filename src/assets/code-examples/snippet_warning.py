@@ -1,0 +1,1 @@
+app.ask_ok_cancel("Confirm Delete", "This will delete all progress.\n\nThis operation cannot be undone. Are you sure you want to proceed?", "warning")

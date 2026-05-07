@@ -9,11 +9,12 @@ interface Props {
   title?: string;
   mark?: string | number | Array<string | number>;
   noCode?: boolean;
+  hideFilename?: boolean;
   zoom?: number;
   static?: boolean; // New: Defaults to false (video) for backward compatibility
 }
 
-const { name, title, mark, noCode = false, zoom = 0.6, static: isStatic = false } = Astro.props;
+const { name, title, mark, noCode = false, hideFilename = false, zoom = 0.6, static: isStatic = false } = Astro.props;
 
 // 1. Python file
 let codeString = "";
@@ -76,7 +77,7 @@ const imageSrcDark = `/images/code-examples/${name}_dark.png`;
     
     {!noCode && (
       <div class="example-code">
-        <Code code={codeString} lang="python" title={`${name}.py`} mark={mark} />
+        <Code code={codeString} lang="python" title={hideFilename ? undefined : `${name}.py`} mark={mark} />
       </div>
     )}
   </div>
