@@ -1,0 +1,48 @@
+---
+title: The Timer Class
+description: An overview of the Timer class in GooeyPie and how to use it for keeping accurate time for applications like stopwatches, countdowns, and more.
+---
+
+import CodeExample from '../../../components/CodeExample.astro';
+
+The Timer is a utility class for accurately keeping track of elapsed time. It acts like a stopwatch and can be paused, stopped and restarted as required.
+
+While there are `app.set_interval()` and `app.set_timeout()` methods for scheduling functions to run after a certain amount of time, the Timer class is more suitable for applications that require precise timekeeping, such as stopwatches, countdowns, or any situation where you need to track how much time has passed.
+
+
+### Example: Stopwatch
+This example creates a simple stopwatch with Start, Stop, and Reset buttons. The Timer class is used to keep track of the elapsed time, and the `set_interval()` method is used to update the display every 100 milliseconds.
+
+<CodeExample
+  name="stopwatch"
+  title="Simple Stopwatch"
+  mark={["stopwatch"]}
+/>
+
+## Creating a Timer
+You create a Timer with `gp.Timer()`: 
+```python
+my_timer = gp.Timer()
+```
+This creates a new Timer, initialised to 0, which will not start until the `start()` method is callled.
+
+### Timer properties
+| Name | Type | Description |
+| --- | --- | --- |
+| `.time` | float | Gets the total seconds elapsed since the timer started. |
+| `.milliseconds` | integer | Gets the milliseconds component of the elapsed time, as an integer from 0 to 999. |
+| `.seconds` | integer | Gets the seconds component of the elapsed time, as an integer from 0 to 59. |
+| `.minutes` | integer | Gets the minutes component of the elapsed time, as an integer from 0 to 59. |
+| `.hours` | integer | Gets the hours component of the elapsed time, as an integer. |
+| `.stopped` | boolean | Returns a Boolean representing whether the timer is currently stopped. |
+| `.paused` | boolean | Returns a Boolean representing whether the timer is currently paused. |
+
+### Timer methods
+
+| Name | Description |
+| --- | --- |
+| `start()` | Starts the timer, or continues the timer if it is paused. Has no effect if the timer is already running. |
+| `stop()` | Stops the timer and resets the time elapsed to 0. |
+| `pause()` | Pauses the timer. Timing can be resumed by calling `start()`. Has no effect if the timer is not running. |
+| `restart()` | Clears the timer and starts timing again. |
+

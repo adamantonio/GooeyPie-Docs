@@ -77,6 +77,12 @@ export default defineConfig({
                         { label: 'Popups', slug: 'windows/popups' },
                     ],
                 },
+                {
+                    label: 'Utilities',
+                    items: [
+                        { label: 'The Timer Class', slug: 'utilities/timer' },
+                    ],
+                },
             ],
         }),
     ],
