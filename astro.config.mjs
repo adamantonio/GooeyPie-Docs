@@ -51,6 +51,7 @@ export default defineConfig({
                         { label: 'Secret', link: '/widgets/secret' },
                         { label: 'Slider', link: '/widgets/slider' },
                         { label: 'Switch', link: '/widgets/switch' },
+                        { label: 'Table', link: '/widgets/table' },
                         { label: 'Textbox', link: '/widgets/textbox' },
                     ],
                 },

@@ -1,0 +1,131 @@
+---
+title: Table
+
+syntax: my_table = gp.Table(headings)
+
+parameters:
+  - name: headings
+    type: list of strings
+    description: A list of strings corresponding to the headings of the table columns.
+properties:
+  - name: data
+    type: list of lists
+    description: Gets or sets all data in the table as a list of lists (or tuples). Each inner list must match the number of columns.
+  - name: selected
+    type: list/tuple, or list of lists if `multiple_selection` is enabled
+    description: Returns the selected data row(s) in the table. Returns `None` if no row is selected.
+  - name: selected_row
+    type: integer, or list of integers if `multiple_selection` is enabled
+    description: Gets or sets the index (or indices), starting from 0, of the selected row(s).
+  - name: multiple_selection
+    type: boolean
+    description: Gets or sets whether multiple row selection is enabled for the table.
+  - name: height
+    type: integer
+    description: Gets or sets the height of the table as the number of visible lines.
+  - name: disabled
+    type: boolean
+    description: Gets or sets whether the table widget is disabled.
+  - name: sortable
+    type: boolean
+    description: Gets or sets whether the data can be sorted by clicking on the column headings.
+methods:
+  - name: add_row(data)
+    parameters: data
+    returns: '`None`'
+    description: Adds a row of data to the end of the table. `data` must be a list or tuple with the same number of items as the table has columns.
+  - name: add_row_to_top(data)
+    parameters: data
+    returns: '`None`'
+    description: Adds a row of data to the top of the table. `data` must be a list or tuple with the same number of items as the table has columns.
+  - name: add_row_at(index, data)
+    parameters: index, data
+    returns: '`None`'
+    description: Adds a row of data to the table at a specified `index`. `data` must be a list or tuple with the same number of items as the table has columns.
+  - name: remove_row(index)
+    parameters: index
+    returns: list
+    description: Removes and returns the row of data at the specified `index` from the table.
+  - name: remove_selected()
+    parameters: none
+    returns: list, or list of lists if `multiple_selection` is enabled
+    description: Removes and returns the currently selected row(s) from the table.
+  - name: clear()
+    parameters: none
+    returns: '`None`'
+    description: Removes all data rows from the table.
+  - name: select_row(index)
+    parameters: index
+    returns: '`None`'
+    description: Selects the row at the specified `index`.
+  - name: select_all()
+    parameters: none
+    returns: '`None`'
+    description: Selects all rows in the table if `multiple_selection` is enabled.
+  - name: select_none()
+    parameters: none
+    returns: '`None`'
+    description: Clears any selected rows in the table.
+  - name: set_column_width(column, width)
+    parameters: column, width
+    returns: '`None`'
+    description: Sets the width in pixels of the specified `column` index (starting from 0).
+  - name: set_column_widths(*widths)
+    parameters: '*widths'
+    returns: '`None`'
+    description: Sets the widths in pixels for all columns of the table in order.
+  - name: set_column_alignment(column, align)
+    parameters: column, align
+    returns: '`None`'
+    description: Sets the alignment of content in the specified `column` index. Must be `"left"`, `"center"`, or `"right"`.
+  - name: set_column_alignments(*aligns)
+    parameters: '*aligns'
+    returns: '`None`'
+    description: Sets the alignment of all columns in order. Values must be `"left"`, `"center"`, or `"right"`.
+events: []
+exclude_events: []
+styles:
+  - name: table_bg_color
+    description: The background color of the table area.
+  - name: border_color
+    description: The color of the border around the table.
+  # - name: border_width
+  #   description: The width of the border around the table.
+  #   default: "2"
+  # - name: corner_radius
+  #   description: The radius of the corners of the table frame.
+  #   default: "6"
+  - name: font_name
+    description: The font family of the text inside the table cells.
+  - name: font_size
+    description: The font size of the text inside the table cells.
+  - name: font_style
+    description: The font style of the text inside the table cells (`"normal"` or `"italic"`).
+  - name: font_weight
+    description: The font weight of the text inside the table cells (`"normal"` or `"bold"`).
+  - name: text_color
+    description: The text color of the data cells.
+  - name: selected_color
+    description: The background color of the selected row(s).
+  - name: header_bg_color
+    description: The background color of the table header row.
+  - name: header_text_color
+    description: The text color of the column headings.
+    default: '"white"'
+  - name: header_font_name
+    description: The font family of the column headings.
+  - name: header_font_size
+    description: The font size of the column headings.
+  - name: header_font_weight
+    description: The font weight of the column headings.
+  - name: header_font_style
+    description: The font style of the column headings.
+---
+
+import CodeExample from '../../components/CodeExample.astro';
+
+A Table widget displays tabular data organized into rows and columns with fixed headers. It supports custom column sizes, individual column text alignments, multi-row selection, and automatic column sorting when headers are clicked.
+
+## Examples
+
+Coming soon!
