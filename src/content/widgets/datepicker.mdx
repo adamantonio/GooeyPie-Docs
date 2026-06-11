@@ -1,0 +1,139 @@
+---
+title: DatePicker
+
+syntax: my_date = gp.DatePicker()
+
+properties:
+  - name: date
+    type: datetime.date object
+    description: Gets or sets the date of the Date widget. The date should be a Python [datetime.date](https://docs.python.org/3/library/datetime.html#date-objects) object.
+  - name: minimum_date
+    type: datetime.date object
+    description: Gets or sets the minimum date that can be selected in the Date widget.
+  - name: maximum_date
+    type: datetime.date object
+    description: Gets or sets the maximum date that can be selected in the Date widget.
+  - name: date_str
+    type: string
+    description: Gets or sets the date of the Date widget as a string in the format specified by the `format` property. Setting this property will update the `date` property to match the new date.
+  - name: width
+    type: integer
+    description: Gets or sets the width of the widget in pixels.
+  - name: disabled
+    type: boolean
+    description: Gets or sets whether the date widget is disabled. When disabled is set to True, the date widget does not respond to user interactions.
+  - name: allow_manual_input
+    type: boolean
+    description: Gets or sets whether the user is allowed to manually input a date into the date widget. When allow_manual_input is set to True, the user can type a date into the date widget in addition to selecting a date from the calendar. The default value is True.
+  - name: format
+    type: string
+    description: Gets or sets the format of the date displayed in the date widget. The format should be a string that follows the [strftime format codes](https://docs.python.org/3/library/datetime.html#strftime-and-strptime-format-codes). The default format is "%Y-%m-%d", which displays the date as "2024-06-01".
+  - name: localization
+    type: string
+    description: Gets or sets the localization of the date widget. The localization should be a [locale string](https://simplelocalize.io/data/locales/) such as `"fr_FR"` or `"en_US"`. The default localization is the empty string `""`, which uses the system default locale.
+
+methods:
+  - name: open()
+    parameters: none
+    returns: None
+    description: Opens the calendar dropdown of the date widget, allowing the user to select a date from the calendar.
+  - name: set_today()
+    parameters: none
+    returns: None
+    description: Sets the date of the date widget to today's date.
+  - name: clear()
+    parameters: none
+    returns: None
+    description: Clears the date from the date widget, setting the `date` property to `None` and the `date_str` property to an empty string.
+  - name: add_days(days)
+    parameters: days()
+    returns: None
+    description: Adds the specified number of days to the current date of the date widget.
+  - name: subtract_days(days)
+    parameters: days()
+    returns: None
+    description: Subtracts the specified number of days from the current date of the date widget.
+  - name: add_months(months)
+    parameters: months()
+    returns: None
+    description: Adds the specified number of months to the current date of the date widget.
+  - name: subtract_months(months)
+    parameters: months()
+    returns: None
+    description: Subtracts the specified number of months from the current date of the date widget.
+  - name: add_years(years)
+    parameters: years() 
+    returns: None
+    description: Adds the specified number of years to the current date of the date widget.
+  - name: subtract_years(years)
+    parameters: years()
+    returns: None
+    description: Subtracts the specified number of years from the current date of the date widget.
+
+events:
+  - name: on_change(event_function)
+    description: The function to call when the date is changed. This event is triggered whenever the user selects a new date from the calendar or manually inputs a new date into the date widget, as well as when the date is changed programmatically by setting the `date` property or using the `add_days()`, `add_months()`, or `add_years()` methods.
+
+styles:
+  - name: date_border_color
+    description: The color of the border of the date widget.
+    default: '"transparent"'
+  - name: date_border_width
+    description: The width of the border of the date widget.
+    default: "2"
+  - name: date_bg_color
+    description: The background color of the date widget.
+    default: '"transparent"'
+  - name: text_color
+    description: The color of the text of the date widget.
+  - name: text_disabled_color
+    description: The color of the text of the date widget when it is disabled.
+  - name: date_font_name
+    description: 'The font of the text of the date widget. Either an installed font or a generic font name: `"serif"`, `"sans-serif"`, `"monospace"` or `"system"`'
+    default: '"system"'
+  - name: date_font_size
+    description: The size of the text of the date widget.
+    default: "12"
+  - name: date_font_weight
+    description: 'The weight of the text of the date widget. Either `"normal"` or `"bold"`.'
+    default: '"normal"'
+  - name: date_font_style
+    description: 'The style of the text of the date widget. Either `"normal"` or `"italic"`.'
+    default: '"normal"'
+  - name: open_button_bg_color
+    description: The background color of the open calendar button of the date widget.
+    default: '"transparent"'
+  - name: open_button_hover_color
+    description: The background color of the open calendar button of the date widget when hovered over.
+    default: '"transparent"'
+  - name: open_button_icon_color
+    description: The color of the icon of the open calendar button of the date widget.
+  - name: month_font_name
+    description: 'The font of the month and year in the calendar dropdown. Either an installed font or a generic font name: `"serif"`, `"sans-serif"`, `"monospace"` or `"system"`'
+    default: '"system"'
+  - name: month_text_color
+    description: The color of the month and year text in the calendar dropdown.
+  - name: month_button_bg_color
+    description: The background color of the month and year buttons in the calendar dropdown.
+  - name: month_button_hover_color
+    description: The background color of the month and year buttons in the calendar dropdown when hovered over.
+  - name: day_text_color
+    description: The color of the day numbers in the calendar dropdown.
+  - name: day_hover_color
+    description: The background color of the day numbers in the calendar dropdown when hovered over.
+---
+
+
+import CodeExample from '../../components/CodeExample.astro';
+
+The Date widget allows the user to select a date from a calendar dropdown or manually input a date. The selected date can be accessed and modified through the `date` property, which is a `datetime.date` object, or through the `date_str` property, which is a string representation of the date in the format specified by the `format` property. The Date widget also provides methods for manipulating the date, such as adding or subtracting days, months, or years.
+
+## Examples
+
+### Days until
+This example demonstrates how to use the `Date` widget to calculate the number of days until a specific date. The user can select a date from the calendar dropdown, and the app will display the number of days from today's date until the selected date.  
+<CodeExample
+  name="days_until"
+  title="Days until"
+  mark="target_date"
+/>

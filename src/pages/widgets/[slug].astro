@@ -69,22 +69,20 @@ const article = ['a', 'e', 'i', 'o', 'u'].includes(firstLetter) ? 'an' : 'a';
   <Code code={syntax} lang="python" />
   
 
-  {
-    parameters && (
-      <>
-        <h3 id="parameters">Parameters</h3>
-        <ul>
-          {
-            parameters.map((p) => (
-              <li>
-                <code>{p.name}</code> ({p.type}): <span set:html={p.description} />
-              </li>
-            ))
-          }
-        </ul>
-      </>
-    )
-  }
+  {parameters.length > 0 && (
+    <>
+      <h3 id="parameters">Parameters</h3>
+      <ul>
+        {
+          parameters.map((p) => (
+            <li>
+              <code>{p.name}</code> ({p.type}): <span set:html={p.description} />
+            </li>
+          ))
+        }
+      </ul>
+    </>
+  )}
 
 
   <h2 id="properties"><i class="fa-solid fa-list-ul"></i>Properties</h2>

@@ -40,6 +40,7 @@ export default defineConfig({
                         { label: 'Button', link: '/widgets/button' },
                         { label: 'ButtonGroup', link: '/widgets/buttongroup' },
                         { label: 'Checkbox', link: '/widgets/checkbox' },
+                        { label: 'DatePicker', link: '/widgets/datepicker' },
                         { label: 'Dropdown', link: '/widgets/dropdown' },
                         { label: 'Entry', link: '/widgets/entry' },
                         { label: 'ImageButton', link: '/widgets/imagebutton' },
