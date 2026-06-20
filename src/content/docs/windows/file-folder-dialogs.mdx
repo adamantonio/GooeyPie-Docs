@@ -13,11 +13,36 @@ These are "Native Dialogs", meaning they will look exactly like the standard "Op
 
 Unlike standard widgets or popups, these dialogs are created directly from the `gooeypie` library itself, not your `app` object. They stay invisible in the background until you are ready to show them.
 
-| Window Type | Purpose | Example |
-| :--- | :--- | :--- |
-| `OpenFileWindow` | Picking an existing file to open | `open_win = gp.OpenFileWindow('Select a file')` |
-| `SaveFileWindow` | Choosing where to save a new file | `save_win = gp.SaveFileWindow('Export Data')` |
-| `OpenFolderWindow` | Selecting an entire folder/directory | `folder_win = gp.OpenFolderWindow('Select Folder')` |
+| Window Type | Purpose |
+| :--- | :--- |
+| `OpenFileWindow` | Picking an existing file to open |
+| `SaveFileWindow` | Choosing where to save a new file |
+| `OpenFolderWindow` | Selecting an entire folder/directory |
+
+### OpenFileWindow
+<CodeExample
+  name="snippet_open_file_window"
+  title="Open File Window"
+  hideFilename
+  static
+  zoom="100%"
+/>
+
+### SaveFileWindow
+<CodeExample
+  name="snippet_save_file_window"
+  title="Save File Window"
+  hideFilename
+  static
+/>
+
+### OpenFolderWindow
+<CodeExample
+  name="snippet_open_folder_window"
+  title="Open Folder Window"
+  hideFilename
+  static
+/>
 
 
 ## Opening and Getting Results
@@ -33,7 +58,7 @@ To actually show the window to the user, you must call the `.open()` method. Thi
 
 You can control which folder the window shows first so your users don't have to go searching through their entire computer.
 
-### 1. The Quick Way (`set_initial_folder`)
+### The Quick Way (`set_initial_folder`)
 Use `.set_initial_folder(location)` to pick a common starting spot.
 * `'home'`: The user's home directory.
 * `'documents'`: The Documents folder.
@@ -42,7 +67,7 @@ Use `.set_initial_folder(location)` to pick a common starting spot.
 
 You can also pass extra folders to go deeper! For example, `.set_initial_folder('documents', 'MyGames', 'Saves')` will open right to your custom save folder.
 
-### 2. The Specific Way (`initial_path`)
+### The Specific Way (`initial_path`)
 If you have a very specific exact path in mind, use the `.initial_path` property to set it manually (e.g., `open_win.initial_path = 'C:/Images/'`).
 
 
