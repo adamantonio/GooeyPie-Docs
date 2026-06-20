@@ -44,7 +44,7 @@ const imageSrcDark = `/images/code-examples/${name}_dark.png`;
           data-light={imageSrcLight} 
           data-dark={imageSrcDark} 
           alt={`${name} layout example`} 
-          style={`zoom: ${zoom};`}
+          style={`width: ${zoom};`}
           class="example-media static-img" 
         />
       ) : (
@@ -109,9 +109,14 @@ const imageSrcDark = `/images/code-examples/${name}_dark.png`;
     height: auto;
     display: block;
     margin-inline: auto;
-    /* Keeps the pixels sharp for UI elements [cite: 1113-1114] */
+    /* Keeps the pixels sharp for UI elements */
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
+  }
+
+  .static-img {
+    /* For static images, we want to maintain the original pixel density */
+    image-rendering: auto;
   }
 
   .controls-overlay {
