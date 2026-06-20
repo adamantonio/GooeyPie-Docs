@@ -77,6 +77,7 @@ export default defineConfig({
                         { label: 'The Main Window', slug: 'windows/the-main-window' },
                         { label: 'Additional Windows', slug: 'windows/additional-windows' },
                         { label: 'Popups', slug: 'windows/popups' },
+                        { label: 'File and folder dialogs', slug: 'windows/file-folder-dialogs' },
                     ],
                 },
                 {
