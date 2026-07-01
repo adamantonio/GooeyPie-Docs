@@ -23,6 +23,9 @@ properties:
   - name: height
     type: integer
     description: Gets or sets the height of the table as the number of visible lines.
+  - name: width
+    type: integer
+    description: Gets or sets the total width of the table in pixels.
   - name: disabled
     type: boolean
     description: Gets or sets whether the table widget is disabled.
@@ -82,8 +85,13 @@ methods:
     parameters: '*aligns'
     returns: '`None`'
     description: Sets the alignment of all columns in order. Values must be `"left"`, `"center"`, or `"right"`.
-events: []
+
+events:
+  - name: on_change(event_function)
+    description: The function to call when a row is selected or deselected. This event is triggered whenever the user selects or deselects a row in the table, or when the selection is changed programmatically.
+
 exclude_events: []
+
 styles:
   - name: table_bg_color
     description: The background color of the table area.
@@ -128,4 +136,11 @@ A Table widget displays tabular data organized into rows and columns with fixed 
 
 ## Examples
 
-Coming soon!
+### Workout Tracker
+This app shows how rows of data in a table can be added during runtime.
+
+<CodeExample
+  name="workout_tracker"
+  title="Workout Tracker"
+  mark="exercise_tbl"
+/>

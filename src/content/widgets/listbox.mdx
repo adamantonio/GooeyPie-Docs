@@ -61,6 +61,10 @@ methods:
     returns: '`None`'
     description: Removes all the items from the listbox.
 
+events:
+  - name: on_change(event_function)
+    description: The function to call when the selected item in the listbox changes. This event is triggered whenever the user selects a different item from the listbox or when the selected item is changed programmatically.
+
 styles:
   - name: bg_color
     description: The background color of the listbox.
