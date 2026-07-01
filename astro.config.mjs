@@ -68,7 +68,7 @@ export default defineConfig({
                     items: [
                         { label: 'The Grid System', slug: 'layout/the-grid-system' },
                         { label: 'Container Widgets', slug: 'layout/container-widgets' },
-                        { label: 'Tabbed Layouts', slug: 'layout/tabbed-layouts' },
+                        // { label: 'Tabbed Layouts', slug: 'layout/tabbed-layouts' },
                     ],
                 },                
                 {

@@ -18,6 +18,8 @@ In GooeyPie, you organize your app's layout using a grid system.
     class="centered width-67"
 />
 
+## Adding widgets to the grid
+
 To add a widget to the window, you use the `add()` method, and specify the column and row for that widget:
 
 ```python
@@ -32,6 +34,44 @@ app.add(widget, column, row)
     class="centered"
 />
 
+## Widget Spacing and Margins
+
+By default, GooeyPie gives all widgets and containers a comfortable, uniform cushion of spacing around them when they are added to a grid cell. This ensures your app looks clean right out of the box without you needing to manually push things apart. 
+
+However, you can override these defaults and fine-tune your layout using margin parameters directly inside the `add()` method. There are 7 margin arguments available to give you complete control over spacing:
+
+| Parameter | What it controls | Example |
+| :--- | :--- | :--- |
+| `margin` | Sets all 4 sides to the same value simultaneously | `margin=10` |
+| `margin_horizontal` | Sets the **left** and **right** margins together | `margin_horizontal=20` |
+| `margin_vertical` | Sets the **top** and **bottom** margins together | `margin_vertical=5` |
+| `margin_left` | Overrides just the **left** edge | `margin_left=0` |
+| `margin_top` | Overrides just the **top** edge | `margin_top=15` |
+| `margin_right` | Overrides just the **right** edge | `margin_right=0` |
+| `margin_bottom` | Overrides just the **bottom** edge | `margin_bottom=8` |
+
+### Setting Uniform Spacing
+If you want to add a large, equal cushion on all sides of a widget, use `margin`:
+
+```python
+# Gives the label a 20-pixel cushion on all sides
+app.add(name_lbl, 1, 1, margin=20)
+```
+
+### Changing Specific Sides
+You do not need to specify all four sides if you only want to change one. Any side you leave out will simply keep its default spacing.
+
+```python
+# Keeps default spacing on top, left, and right, but removes the bottom margin entirely
+app.add(name_lbl, 1, 1, margin_bottom=0)
+
+# Left and right margins set to 10, top margin set to 15, bottom margin keeps its default value
+app.add(submit_btn, 1, 2, margin_horizontal=10, margin_top=15)
+```
+
+:::tip[Squashing Widgets Together]
+Because all widgets have a default margin on all sides, if you want two widgets to sit flush against each other, you will need to set the opposite margins of both widgets to 0.
+:::
 
 ## Spanning Columns and Rows
 Sometimes you want a widget to stretch across multiple columns or rows. You can do this using the `column_span` and `row_span` parameters when adding a widget:
