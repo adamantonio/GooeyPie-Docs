@@ -8,7 +8,7 @@ name_entry = gp.Entry()
 
 # Message label and textbox
 message_label = gp.Label("Message")
-message_entry = gp.Textbox()
+message_textbox = gp.Textbox()
 
 submit_btn = gp.Button("Send Message", None)
 
@@ -16,7 +16,7 @@ submit_btn = gp.Button("Send Message", None)
 app.add(name_label, 1, 1)
 app.add(name_entry, 2, 1, expand_horizontal=True)
 app.add(message_label, 1, 2)
-app.add(message_entry, 2, 2, expand_horizontal=True, expand_vertical=True)
+app.add(message_textbox, 2, 2, expand_horizontal=True, expand_vertical=True)
 app.add(submit_btn, 2, 3, align_horizontal="right")
 
 # Set column weights
