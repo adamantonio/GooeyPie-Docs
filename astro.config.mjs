@@ -4,6 +4,8 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
+    site: 'https://gooeypie.dev',
+    trailingSlash: 'never',
     integrations: [
         starlight({
             title: 'GooeyPie',
@@ -90,4 +92,3 @@ export default defineConfig({
         }),
     ],
 });
-
